@@ -28,6 +28,9 @@ zinit light zsh-users/zsh-autosuggestions
 # FZF Tab
 zinit light Aloxaf/fzf-tab
 
+# EZA replacement for ls
+zi light z-shell/zsh-eza
+
 # Add in snippets
 zinit snippet OMZP::git
 zinit snippet OMZP::sudo
@@ -84,9 +87,14 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'color $realpath'
 
 # Aliases
-alias ls='ls --color'
-alias ll='ls -ahl'
-
+alias ls='eza $eza_params'
+alias l='eza --git-ignore $eza_params'
+alias ll='eza --all --header --long $eza_params'
+alias llm='eza --all --header --long --sort=modified $eza_params'
+alias la='eza -lbhHigUmuSa'
+alias lx='eza -lbhHigUmuSa@'
+alias lt='eza --tree $eza_params'
+alias tree='eza --tree $eza_params'
 
 # Shell integrations
 eval "$(fzf --zsh)"
