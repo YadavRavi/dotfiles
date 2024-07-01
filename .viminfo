@@ -11,10 +11,10 @@
 # hlsearch on (H) or off (h):
 ~h
 # Command Line History (newest to oldest):
-:wq!
-|2,0,1719733872,,"wq!"
 :q!
-|2,0,1719677807,,"q!"
+|2,0,1719765321,,"q!"
+:wq!
+|2,0,1719763611,,"wq!"
 :q
 |2,0,1719383930,,"q"
 :qw!
@@ -34,39 +34,31 @@
 
 # Registers:
 ""1	LINE	0
-	eval "$(oh-my-posh init zsh --config $(brew --prefix oh-my-posh)/themes/jandobbeleer.omp.json)"
-|3,1,1,1,1,0,1719677739,"eval \"$(oh-my-posh init zsh --config $(brew --prefix oh-my-posh)/themes/jandobbeleer.omp.json)\""
+	alias ll='ls -ahl'
+|3,1,1,1,1,0,1719763602,"alias ll='ls -ahl'"
 "2	LINE	0
-	
-|3,0,2,1,1,0,1719677073,""
+	alias ls='ls --color'
+|3,0,2,1,1,0,1719763601,"alias ls='ls --color'"
 "3	LINE	0
-	zinit ice depth=1; zinit light romkatv/powerlevel10k
-|3,0,3,1,1,0,1719677072,"zinit ice depth=1; zinit light romkatv/powerlevel10k"
-"4	LINE	0
-	# Add Powerlevel10k
-|3,0,4,1,1,0,1719677070,"# Add Powerlevel10k"
-"5	CHAR	0
-	# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-	# Initialization code that may require console input (password prompts, [y/n]
-	# confirmations, etc.) must go above this block; everything else may go below.
-	if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-	  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-	fi
+	zi ice wait lucid has'eza' atinit'AUTOCD=1'
+|3,0,3,1,1,0,1719763568,"zi ice wait lucid has'eza' atinit'AUTOCD=1'"
+"4	CHAR	0
+	zinit light 
 	
-|3,0,5,0,7,0,1719676925,"# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.","# Initialization code that may require console input (password prompts, [y/n]","# confirmations, etc.) must go above this block; everything else may go below.","if [[ -r \"${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh\" ]]; then","  source \"${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh\"","fi",""
+|3,0,4,0,2,0,1719763502,"zinit light ",""
+"5	LINE	0
+	eval "$(oh-my-posh init zsh --config $(brew --prefix oh-my-posh)/themes/jandobbeleer.omp.json)"
+|3,0,5,1,1,0,1719677739,"eval \"$(oh-my-posh init zsh --config $(brew --prefix oh-my-posh)/themes/jandobbeleer.omp.json)\""
 "6	LINE	0
-	# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-|3,0,6,1,1,0,1719676883,"# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh."
+	
+|3,0,6,1,1,0,1719677073,""
 "7	LINE	0
-	[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-|3,0,7,1,1,0,1719676880,"[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh"
+	zinit ice depth=1; zinit light romkatv/powerlevel10k
+|3,0,7,1,1,0,1719677072,"zinit ice depth=1; zinit light romkatv/powerlevel10k"
 "8	LINE	0
-	
-|3,0,8,1,1,0,1719399785,""
-"9	LINE	0
-	
-|3,0,9,1,1,0,1719399784,""
-"-	CHAR	0
+	# Add Powerlevel10k
+|3,0,8,1,1,0,1719677070,"# Add Powerlevel10k"
+"9	CHAR	0
 	# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 	# Initialization code that may require console input (password prompts, [y/n]
 	# confirmations, etc.) must go above this block; everything else may go below.
@@ -74,253 +66,254 @@
 	  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 	fi
 	
-|3,0,36,0,7,0,1719676925,"# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.","# Initialization code that may require console input (password prompts, [y/n]","# confirmations, etc.) must go above this block; everything else may go below.","if [[ -r \"${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh\" ]]; then","  source \"${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh\"","fi",""
+|3,0,9,0,7,0,1719676925,"# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.","# Initialization code that may require console input (password prompts, [y/n]","# confirmations, etc.) must go above this block; everything else may go below.","if [[ -r \"${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh\" ]]; then","  source \"${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh\"","fi",""
+"-	CHAR	0
+	zinit light 
+	
+|3,0,36,0,2,0,1719763502,"zinit light ",""
 
 # File marks:
-'0  5  0  ~/.ssh/config
-|4,48,5,0,1719733872,"~/.ssh/config"
-'1  59  77  ~/.zshrc
-|4,49,59,77,1719677898,"~/.zshrc"
-'2  50  25  ~/.zshrc
-|4,50,50,25,1719677807,"~/.zshrc"
-'3  50  25  ~/.zshrc
-|4,51,50,25,1719677807,"~/.zshrc"
-'4  55  0  ~/.zshrc
-|4,52,55,0,1719677753,"~/.zshrc"
-'5  55  0  ~/.zshrc
-|4,53,55,0,1719677753,"~/.zshrc"
-'6  55  0  ~/.zshrc
-|4,54,55,0,1719677753,"~/.zshrc"
-'7  55  0  ~/.zshrc
-|4,55,55,0,1719677753,"~/.zshrc"
-'8  85  0  ~/.zshrc
-|4,56,85,0,1719677651,"~/.zshrc"
-'9  85  0  ~/.zshrc
-|4,57,85,0,1719677651,"~/.zshrc"
+'0  59  86  ~/dotfiles/.config/gh/nvim/init.nvim
+|4,48,59,86,1719765321,"~/dotfiles/.config/gh/nvim/init.nvim"
+'1  97  34  ~/.zshrc
+|4,49,97,34,1719763611,"~/.zshrc"
+'2  33  0  ~/.zshrc
+|4,50,33,0,1719763512,"~/.zshrc"
+'3  34  0  ~/.zshrc
+|4,51,34,0,1719763512,"~/.zshrc"
+'4  101  18  ~/.zshrc
+|4,52,101,18,1719761835,"~/.zshrc"
+'5  90  18  ~/.zshrc
+|4,53,90,18,1719761835,"~/.zshrc"
+'6  97  18  ~/.zshrc
+|4,54,97,18,1719761835,"~/.zshrc"
+'7  93  18  ~/.zshrc
+|4,55,93,18,1719761835,"~/.zshrc"
+'8  101  33  ~/.zshrc
+|4,56,101,33,1719761795,"~/.zshrc"
+'9  90  33  ~/.zshrc
+|4,57,90,33,1719761795,"~/.zshrc"
 
 # Jumplist (newest first):
+-'  59  86  ~/dotfiles/.config/gh/nvim/init.nvim
+|4,39,59,86,1719765321,"~/dotfiles/.config/gh/nvim/init.nvim"
+-'  1  0  ~/dotfiles/.config/gh/nvim/init.nvim
+|4,39,1,0,1719765265,"~/dotfiles/.config/gh/nvim/init.nvim"
+-'  97  34  ~/.zshrc
+|4,39,97,34,1719763611,"~/.zshrc"
+-'  97  34  ~/.zshrc
+|4,39,97,34,1719763611,"~/.zshrc"
+-'  33  0  ~/.zshrc
+|4,39,33,0,1719763559,"~/.zshrc"
+-'  33  0  ~/.zshrc
+|4,39,33,0,1719763559,"~/.zshrc"
+-'  34  0  ~/.zshrc
+|4,39,34,0,1719763512,"~/.zshrc"
+-'  34  0  ~/.zshrc
+|4,39,34,0,1719763512,"~/.zshrc"
+-'  101  18  ~/.zshrc
+|4,39,101,18,1719763292,"~/.zshrc"
+-'  97  18  ~/.zshrc
+|4,39,97,18,1719763292,"~/.zshrc"
+-'  101  18  ~/.zshrc
+|4,39,101,18,1719763292,"~/.zshrc"
+-'  97  18  ~/.zshrc
+|4,39,97,18,1719763292,"~/.zshrc"
+-'  90  18  ~/.zshrc
+|4,39,90,18,1719761835,"~/.zshrc"
+-'  93  18  ~/.zshrc
+|4,39,93,18,1719761835,"~/.zshrc"
+-'  90  18  ~/.zshrc
+|4,39,90,18,1719761835,"~/.zshrc"
+-'  93  18  ~/.zshrc
+|4,39,93,18,1719761835,"~/.zshrc"
+-'  93  33  ~/.zshrc
+|4,39,93,33,1719761795,"~/.zshrc"
+-'  93  33  ~/.zshrc
+|4,39,93,33,1719761795,"~/.zshrc"
+-'  93  24  ~/.zshrc
+|4,39,93,24,1719760784,"~/.zshrc"
+-'  93  24  ~/.zshrc
+|4,39,93,24,1719760784,"~/.zshrc"
+-'  62  77  ~/.zshrc
+|4,39,62,77,1719760722,"~/.zshrc"
+-'  58  77  ~/.zshrc
+|4,39,58,77,1719760722,"~/.zshrc"
+-'  63  77  ~/.zshrc
+|4,39,63,77,1719760722,"~/.zshrc"
+-'  59  77  ~/.zshrc
+|4,39,59,77,1719760722,"~/.zshrc"
+-'  59  77  ~/.zshrc
+|4,39,59,77,1719760722,"~/.zshrc"
+-'  59  77  ~/.zshrc
+|4,39,59,77,1719760722,"~/.zshrc"
+-'  62  77  ~/.zshrc
+|4,39,62,77,1719760722,"~/.zshrc"
+-'  58  77  ~/.zshrc
+|4,39,58,77,1719760722,"~/.zshrc"
+-'  63  77  ~/.zshrc
+|4,39,63,77,1719760722,"~/.zshrc"
+-'  59  77  ~/.zshrc
+|4,39,59,77,1719760722,"~/.zshrc"
+-'  59  77  ~/.zshrc
+|4,39,59,77,1719760722,"~/.zshrc"
+-'  59  77  ~/.zshrc
+|4,39,59,77,1719760722,"~/.zshrc"
+-'  5  0  ~/.ssh/config
+|4,39,5,0,1719733872,"~/.ssh/config"
+-'  5  0  ~/.ssh/config
+|4,39,5,0,1719733872,"~/.ssh/config"
+-'  5  0  ~/.ssh/config
+|4,39,5,0,1719733872,"~/.ssh/config"
+-'  5  0  ~/.ssh/config
+|4,39,5,0,1719733872,"~/.ssh/config"
+-'  5  0  ~/.ssh/config
+|4,39,5,0,1719733872,"~/.ssh/config"
+-'  5  0  ~/.ssh/config
+|4,39,5,0,1719733872,"~/.ssh/config"
+-'  5  0  ~/.ssh/config
+|4,39,5,0,1719733872,"~/.ssh/config"
+-'  5  0  ~/.ssh/config
+|4,39,5,0,1719733872,"~/.ssh/config"
+-'  5  0  ~/.ssh/config
+|4,39,5,0,1719733872,"~/.ssh/config"
+-'  5  0  ~/.ssh/config
+|4,39,5,0,1719733872,"~/.ssh/config"
+-'  5  0  ~/.ssh/config
+|4,39,5,0,1719733872,"~/.ssh/config"
+-'  5  0  ~/.ssh/config
+|4,39,5,0,1719733872,"~/.ssh/config"
+-'  5  0  ~/.ssh/config
+|4,39,5,0,1719733872,"~/.ssh/config"
+-'  5  0  ~/.ssh/config
+|4,39,5,0,1719733872,"~/.ssh/config"
+-'  5  0  ~/.ssh/config
+|4,39,5,0,1719733872,"~/.ssh/config"
+-'  5  0  ~/.ssh/config
+|4,39,5,0,1719733872,"~/.ssh/config"
+-'  5  0  ~/.ssh/config
+|4,39,5,0,1719733872,"~/.ssh/config"
+-'  5  0  ~/.ssh/config
+|4,39,5,0,1719733872,"~/.ssh/config"
+-'  5  0  ~/.ssh/config
+|4,39,5,0,1719733872,"~/.ssh/config"
+-'  5  0  ~/.ssh/config
+|4,39,5,0,1719733872,"~/.ssh/config"
+-'  5  0  ~/.ssh/config
+|4,39,5,0,1719733872,"~/.ssh/config"
+-'  5  0  ~/.ssh/config
+|4,39,5,0,1719733872,"~/.ssh/config"
+-'  5  0  ~/.ssh/config
+|4,39,5,0,1719733872,"~/.ssh/config"
+-'  5  0  ~/.ssh/config
+|4,39,5,0,1719733872,"~/.ssh/config"
+-'  5  0  ~/.ssh/config
+|4,39,5,0,1719733872,"~/.ssh/config"
+-'  5  0  ~/.ssh/config
+|4,39,5,0,1719733872,"~/.ssh/config"
+-'  5  0  ~/.ssh/config
+|4,39,5,0,1719733872,"~/.ssh/config"
+-'  5  0  ~/.ssh/config
+|4,39,5,0,1719733872,"~/.ssh/config"
+-'  5  0  ~/.ssh/config
+|4,39,5,0,1719733872,"~/.ssh/config"
+-'  5  0  ~/.ssh/config
+|4,39,5,0,1719733872,"~/.ssh/config"
+-'  5  0  ~/.ssh/config
+|4,39,5,0,1719733872,"~/.ssh/config"
+-'  5  0  ~/.ssh/config
+|4,39,5,0,1719733872,"~/.ssh/config"
+-'  5  0  ~/.ssh/config
+|4,39,5,0,1719733872,"~/.ssh/config"
+-'  5  0  ~/.ssh/config
+|4,39,5,0,1719733872,"~/.ssh/config"
+-'  5  0  ~/.ssh/config
+|4,39,5,0,1719733872,"~/.ssh/config"
+-'  5  0  ~/.ssh/config
+|4,39,5,0,1719733872,"~/.ssh/config"
+-'  5  0  ~/.ssh/config
+|4,39,5,0,1719733872,"~/.ssh/config"
+-'  5  0  ~/.ssh/config
+|4,39,5,0,1719733872,"~/.ssh/config"
+-'  5  0  ~/.ssh/config
+|4,39,5,0,1719733872,"~/.ssh/config"
+-'  5  0  ~/.ssh/config
+|4,39,5,0,1719733872,"~/.ssh/config"
+-'  5  0  ~/.ssh/config
+|4,39,5,0,1719733872,"~/.ssh/config"
+-'  5  0  ~/.ssh/config
+|4,39,5,0,1719733872,"~/.ssh/config"
+-'  5  0  ~/.ssh/config
+|4,39,5,0,1719733872,"~/.ssh/config"
+-'  5  0  ~/.ssh/config
+|4,39,5,0,1719733872,"~/.ssh/config"
+-'  5  0  ~/.ssh/config
+|4,39,5,0,1719733872,"~/.ssh/config"
+-'  5  0  ~/.ssh/config
+|4,39,5,0,1719733872,"~/.ssh/config"
+-'  5  0  ~/.ssh/config
+|4,39,5,0,1719733872,"~/.ssh/config"
+-'  5  0  ~/.ssh/config
+|4,39,5,0,1719733872,"~/.ssh/config"
+-'  5  0  ~/.ssh/config
+|4,39,5,0,1719733872,"~/.ssh/config"
+-'  5  0  ~/.ssh/config
+|4,39,5,0,1719733872,"~/.ssh/config"
+-'  5  0  ~/.ssh/config
+|4,39,5,0,1719733872,"~/.ssh/config"
+-'  5  0  ~/.ssh/config
+|4,39,5,0,1719733872,"~/.ssh/config"
+-'  5  0  ~/.ssh/config
+|4,39,5,0,1719733872,"~/.ssh/config"
+-'  5  0  ~/.ssh/config
+|4,39,5,0,1719733872,"~/.ssh/config"
+-'  5  0  ~/.ssh/config
+|4,39,5,0,1719733872,"~/.ssh/config"
+-'  5  0  ~/.ssh/config
+|4,39,5,0,1719733872,"~/.ssh/config"
+-'  5  0  ~/.ssh/config
+|4,39,5,0,1719733872,"~/.ssh/config"
+-'  5  0  ~/.ssh/config
+|4,39,5,0,1719733872,"~/.ssh/config"
+-'  5  0  ~/.ssh/config
+|4,39,5,0,1719733872,"~/.ssh/config"
+-'  5  0  ~/.ssh/config
+|4,39,5,0,1719733872,"~/.ssh/config"
+-'  5  0  ~/.ssh/config
+|4,39,5,0,1719733872,"~/.ssh/config"
+-'  5  0  ~/.ssh/config
+|4,39,5,0,1719733872,"~/.ssh/config"
+-'  5  0  ~/.ssh/config
+|4,39,5,0,1719733872,"~/.ssh/config"
 -'  5  0  ~/.ssh/config
 |4,39,5,0,1719733872,"~/.ssh/config"
 -'  1  0  ~/.ssh/config
 |4,39,1,0,1719733851,"~/.ssh/config"
--'  59  77  ~/.zshrc
-|4,39,59,77,1719677898,"~/.zshrc"
--'  59  77  ~/.zshrc
-|4,39,59,77,1719677898,"~/.zshrc"
--'  50  25  ~/.zshrc
-|4,39,50,25,1719677867,"~/.zshrc"
--'  50  25  ~/.zshrc
-|4,39,50,25,1719677867,"~/.zshrc"
--'  50  25  ~/.zshrc
-|4,39,50,25,1719677807,"~/.zshrc"
--'  50  25  ~/.zshrc
-|4,39,50,25,1719677807,"~/.zshrc"
--'  55  0  ~/.zshrc
-|4,39,55,0,1719677764,"~/.zshrc"
--'  55  0  ~/.zshrc
-|4,39,55,0,1719677764,"~/.zshrc"
--'  55  0  ~/.zshrc
-|4,39,55,0,1719677764,"~/.zshrc"
--'  55  0  ~/.zshrc
-|4,39,55,0,1719677764,"~/.zshrc"
--'  55  0  ~/.zshrc
-|4,39,55,0,1719677753,"~/.zshrc"
--'  55  0  ~/.zshrc
-|4,39,55,0,1719677753,"~/.zshrc"
--'  85  0  ~/.zshrc
-|4,39,85,0,1719677664,"~/.zshrc"
--'  85  0  ~/.zshrc
-|4,39,85,0,1719677664,"~/.zshrc"
--'  85  0  ~/.zshrc
-|4,39,85,0,1719677664,"~/.zshrc"
--'  85  0  ~/.zshrc
-|4,39,85,0,1719677664,"~/.zshrc"
--'  85  0  ~/.zshrc
-|4,39,85,0,1719677664,"~/.zshrc"
--'  85  0  ~/.zshrc
-|4,39,85,0,1719677664,"~/.zshrc"
--'  85  0  ~/.zshrc
-|4,39,85,0,1719677651,"~/.zshrc"
--'  85  0  ~/.zshrc
-|4,39,85,0,1719677651,"~/.zshrc"
--'  94  0  ~/.zshrc
-|4,39,94,0,1719677342,"~/.zshrc"
--'  94  0  ~/.zshrc
-|4,39,94,0,1719677342,"~/.zshrc"
--'  94  0  ~/.zshrc
-|4,39,94,0,1719677342,"~/.zshrc"
--'  94  0  ~/.zshrc
-|4,39,94,0,1719677342,"~/.zshrc"
--'  94  0  ~/.zshrc
-|4,39,94,0,1719677342,"~/.zshrc"
--'  94  0  ~/.zshrc
-|4,39,94,0,1719677342,"~/.zshrc"
--'  94  0  ~/.zshrc
-|4,39,94,0,1719677342,"~/.zshrc"
--'  94  0  ~/.zshrc
-|4,39,94,0,1719677342,"~/.zshrc"
--'  94  0  ~/.zshrc
-|4,39,94,0,1719677111,"~/.zshrc"
--'  94  0  ~/.zshrc
-|4,39,94,0,1719677111,"~/.zshrc"
--'  54  0  ~/.zshrc
-|4,39,54,0,1719677035,"~/.zshrc"
--'  54  0  ~/.zshrc
-|4,39,54,0,1719677035,"~/.zshrc"
--'  54  0  ~/.zshrc
-|4,39,54,0,1719677035,"~/.zshrc"
--'  55  0  ~/.zshrc
-|4,39,55,0,1719677035,"~/.zshrc"
--'  55  0  ~/.zshrc
-|4,39,55,0,1719677035,"~/.zshrc"
--'  54  0  ~/.zshrc
-|4,39,54,0,1719677035,"~/.zshrc"
--'  54  0  ~/.zshrc
-|4,39,54,0,1719677035,"~/.zshrc"
--'  54  0  ~/.zshrc
-|4,39,54,0,1719677035,"~/.zshrc"
--'  55  0  ~/.zshrc
-|4,39,55,0,1719677035,"~/.zshrc"
--'  55  0  ~/.zshrc
-|4,39,55,0,1719677035,"~/.zshrc"
--'  59  0  ~/.zshrc
-|4,39,59,0,1719676997,"~/.zshrc"
--'  59  0  ~/.zshrc
-|4,39,59,0,1719676997,"~/.zshrc"
--'  59  0  ~/.zshrc
-|4,39,59,0,1719676997,"~/.zshrc"
--'  59  0  ~/.zshrc
-|4,39,59,0,1719676997,"~/.zshrc"
--'  59  0  ~/.zshrc
-|4,39,59,0,1719676997,"~/.zshrc"
--'  59  0  ~/.zshrc
-|4,39,59,0,1719676997,"~/.zshrc"
--'  59  0  ~/.zshrc
-|4,39,59,0,1719676997,"~/.zshrc"
--'  59  0  ~/.zshrc
-|4,39,59,0,1719676997,"~/.zshrc"
--'  39  88  ~/.zshrc
-|4,39,39,88,1719676744,"~/.zshrc"
--'  43  88  ~/.zshrc
-|4,39,43,88,1719676744,"~/.zshrc"
--'  39  88  ~/.zshrc
-|4,39,39,88,1719676744,"~/.zshrc"
--'  43  88  ~/.zshrc
-|4,39,43,88,1719676744,"~/.zshrc"
--'  39  88  ~/.zshrc
-|4,39,39,88,1719676744,"~/.zshrc"
--'  43  88  ~/.zshrc
-|4,39,43,88,1719676744,"~/.zshrc"
--'  39  88  ~/.zshrc
-|4,39,39,88,1719676744,"~/.zshrc"
--'  43  88  ~/.zshrc
-|4,39,43,88,1719676744,"~/.zshrc"
--'  39  88  ~/.zshrc
-|4,39,39,88,1719676744,"~/.zshrc"
--'  43  88  ~/.zshrc
-|4,39,43,88,1719676744,"~/.zshrc"
--'  39  88  ~/.zshrc
-|4,39,39,88,1719676744,"~/.zshrc"
--'  43  88  ~/.zshrc
-|4,39,43,88,1719676744,"~/.zshrc"
--'  39  88  ~/.zshrc
-|4,39,39,88,1719676744,"~/.zshrc"
--'  43  88  ~/.zshrc
-|4,39,43,88,1719676744,"~/.zshrc"
--'  39  88  ~/.zshrc
-|4,39,39,88,1719676744,"~/.zshrc"
--'  43  88  ~/.zshrc
-|4,39,43,88,1719676744,"~/.zshrc"
--'  39  88  ~/.zshrc
-|4,39,39,88,1719676744,"~/.zshrc"
--'  43  88  ~/.zshrc
-|4,39,43,88,1719676744,"~/.zshrc"
--'  39  88  ~/.zshrc
-|4,39,39,88,1719676744,"~/.zshrc"
--'  43  88  ~/.zshrc
-|4,39,43,88,1719676744,"~/.zshrc"
--'  45  88  ~/.zshrc
-|4,39,45,88,1719676621,"~/.zshrc"
--'  49  88  ~/.zshrc
-|4,39,49,88,1719676621,"~/.zshrc"
--'  45  88  ~/.zshrc
-|4,39,45,88,1719676621,"~/.zshrc"
--'  49  88  ~/.zshrc
-|4,39,49,88,1719676621,"~/.zshrc"
--'  45  88  ~/.zshrc
-|4,39,45,88,1719676621,"~/.zshrc"
--'  49  88  ~/.zshrc
-|4,39,49,88,1719676621,"~/.zshrc"
--'  45  88  ~/.zshrc
-|4,39,45,88,1719676621,"~/.zshrc"
--'  49  88  ~/.zshrc
-|4,39,49,88,1719676621,"~/.zshrc"
--'  45  88  ~/.zshrc
-|4,39,45,88,1719676621,"~/.zshrc"
--'  49  88  ~/.zshrc
-|4,39,49,88,1719676621,"~/.zshrc"
--'  45  88  ~/.zshrc
-|4,39,45,88,1719676621,"~/.zshrc"
--'  49  88  ~/.zshrc
-|4,39,49,88,1719676621,"~/.zshrc"
--'  45  88  ~/.zshrc
-|4,39,45,88,1719676621,"~/.zshrc"
--'  49  88  ~/.zshrc
-|4,39,49,88,1719676621,"~/.zshrc"
--'  45  88  ~/.zshrc
-|4,39,45,88,1719676621,"~/.zshrc"
--'  49  88  ~/.zshrc
-|4,39,49,88,1719676621,"~/.zshrc"
--'  45  88  ~/.zshrc
-|4,39,45,88,1719676621,"~/.zshrc"
--'  49  88  ~/.zshrc
-|4,39,49,88,1719676621,"~/.zshrc"
--'  45  88  ~/.zshrc
-|4,39,45,88,1719676621,"~/.zshrc"
--'  49  88  ~/.zshrc
-|4,39,49,88,1719676621,"~/.zshrc"
--'  88  11  ~/.zshrc
-|4,39,88,11,1719676509,"~/.zshrc"
--'  93  11  ~/.zshrc
-|4,39,93,11,1719676509,"~/.zshrc"
--'  92  11  ~/.zshrc
-|4,39,92,11,1719676509,"~/.zshrc"
--'  97  11  ~/.zshrc
-|4,39,97,11,1719676509,"~/.zshrc"
--'  88  11  ~/.zshrc
-|4,39,88,11,1719676509,"~/.zshrc"
--'  93  11  ~/.zshrc
-|4,39,93,11,1719676509,"~/.zshrc"
--'  92  11  ~/.zshrc
-|4,39,92,11,1719676509,"~/.zshrc"
--'  97  11  ~/.zshrc
-|4,39,97,11,1719676509,"~/.zshrc"
--'  88  11  ~/.zshrc
-|4,39,88,11,1719676509,"~/.zshrc"
--'  93  11  ~/.zshrc
-|4,39,93,11,1719676509,"~/.zshrc"
+-'  1  0  ~/.ssh/config
+|4,39,1,0,1719733851,"~/.ssh/config"
+-'  1  0  ~/.ssh/config
+|4,39,1,0,1719733851,"~/.ssh/config"
+-'  1  0  ~/.ssh/config
+|4,39,1,0,1719733851,"~/.ssh/config"
 
 # History of marks within files (newest to oldest):
 
-> ~/.ssh/config
-	*	1719733867	0
-	"	5	0
-	^	5	0
-	.	4	32
-	+	4	32
+> ~/dotfiles/.config/gh/nvim/init.nvim
+	*	1719765318	0
+	"	59	86
 
 > ~/.zshrc
-	*	1719677895	0
-	"	59	77
-	^	59	78
-	.	59	77
+	*	1719763608	0
+	"	97	34
+	^	97	35
+	.	97	34
 	+	1	34
 	+	1	26
 	+	1	47
 	+	1	0
 	+	1	1
-	+	38	38
-	+	148	21
+	+	41	38
+	+	156	21
 	+	1	69
 	+	1	1
 	+	1	0
@@ -329,57 +322,72 @@
 	+	1	71
 	+	6	32
 	+	9	52
-	+	47	52
+	+	50	52
 	+	21	0
 	+	20	0
 	+	19	4
 	+	20	36
 	+	26	40
-	+	31	0
-	+	61	31
-	+	60	12
-	+	67	13
-	+	68	23
+	+	34	0
+	+	64	31
+	+	63	12
 	+	70	13
-	+	77	24
-	+	62	36
-	+	63	35
-	+	80	54
-	+	87	21
-	+	88	18
-	+	81	51
-	+	92	19
+	+	71	23
+	+	73	13
+	+	80	24
+	+	65	36
+	+	66	35
+	+	83	54
+	+	90	21
+	+	90	18
+	+	84	51
+	+	100	19
 	+	29	25
-	+	82	8
-	+	81	8
-	+	82	30
-	+	83	66
-	+	35	0
-	+	32	23
-	+	34	36
-	+	33	14
+	+	85	8
+	+	84	8
+	+	85	30
+	+	86	66
+	+	38	0
+	+	35	23
+	+	37	36
+	+	36	14
 	+	19	0
 	+	23	17
-	+	93	31
-	+	84	67
+	+	101	31
+	+	87	67
 	+	1	0
 	+	1	12
 	+	20	5
-	+	88	11
-	+	53	12
-	+	54	28
+	+	90	11
+	+	56	12
+	+	57	28
 	+	1	0
-	+	58	1
-	+	54	29
-	+	52	0
-	+	53	0
-	+	60	13
+	+	61	1
+	+	57	29
+	+	55	0
+	+	56	0
+	+	63	13
 	+	2	0
 	+	15	0
-	+	54	92
-	+	54	29
-	+	55	0
-	+	59	77
+	+	57	92
+	+	57	29
+	+	58	0
+	+	62	77
+	+	101	19
+	+	39	0
+	+	30	0
+	+	32	0
+	+	34	0
+	+	32	0
+	+	90	26
+	+	97	34
+
+> ~/.ssh/config
+	*	1719733867	0
+	"	5	0
+	^	5	0
+	.	4	32
+	+	4	32
 
 > ~/.config/starship.toml
 	*	1719553525	0
