@@ -87,6 +87,7 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'color $realpath'
 
 # Aliases
+alias cat='bat'
 alias ls='eza $eza_params'
 alias l='eza --git-ignore $eza_params'
 alias ll='eza --all --header --long $eza_params'
@@ -102,4 +103,3 @@ eval "$(zoxide init --cmd cd zsh)"
 
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-
