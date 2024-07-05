@@ -25,6 +25,9 @@ zinit cdreplay -q
 # ZSH Autosuggestions
 zinit light zsh-users/zsh-autosuggestions
 
+# Set up fzf key bindings and fuzzy completion
+source <(fzf --zsh)
+
 # FZF Tab
 zinit light Aloxaf/fzf-tab
 
@@ -96,6 +99,8 @@ alias la='eza -lbhHigUmuSa'
 alias lx='eza -lbhHigUmuSa@'
 alias lt='eza --tree $eza_params'
 alias tree='eza --tree $eza_params'
+
+alias nfz='nvim $(fzf -m --preview="bat --color=always {}")'
 
 # Shell integrations
 eval "$(fzf --zsh)"
