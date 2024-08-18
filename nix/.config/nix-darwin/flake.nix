@@ -36,6 +36,19 @@
 
       # The platform the configuration will be used on.
       nixpkgs.hostPlatform = "aarch64-darwin";
+
+      security.pam.enableSudoTouchIdAuth = true;
+
+      system.defaults = {
+          NSGlobalDomain.AppleICUForce24HourTime = true;
+          NSGlobalDomain.AppleInterfaceStyle = "Dark";
+          dock.autohide = true;
+          dock.mru-spaces = false;
+          finder.FXPreferredViewStyle = "clmv";
+          loginwindow.LoginWindowText = "Ad Astra Per Astra";
+          screencapture.location = "~/Desktop/";
+          screensaver.askForPasswordDelay = 10;
+        };
     };
   in
   {
