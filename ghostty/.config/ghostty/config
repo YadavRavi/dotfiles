@@ -6,13 +6,12 @@ command = /bin/zsh
 
 click-repeat-interval = 500
 
-auto-update-channel = stable
-
 theme = Catppuccin Mocha
 
 macos-titlebar-style = tabs
 macos-option-as-alt = left
 
-background-opacity = 0.96
-background-blur-radius = 40
 keybind = shift+enter=text:\x1b\r
+
+# Machine-specific overrides (gitignored)
+config-file = local

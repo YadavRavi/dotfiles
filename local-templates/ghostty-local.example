@@ -1,0 +1,9 @@
+# ~/.config/ghostty/local — Machine-specific Ghostty overrides
+# Copy to ~/.config/ghostty/local and edit for this machine.
+
+background-opacity = 0.96
+background-blur-radius = 40
+auto-update-channel = stable
+
+# Font size (adjust for display)
+# font-size = 14
