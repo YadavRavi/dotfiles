@@ -1,0 +1,26 @@
+# ~/.config/tmux/local.conf — Machine-specific tmux overrides
+# Copy to ~/.config/tmux/local.conf and edit for this machine.
+
+# --- Terminal Emulator ---
+# Ghostty (macOS)
+set -ag terminal-overrides ",xterm-ghostty:RGB"
+set -g extended-keys always
+set -as terminal-features 'xterm-ghostty:extkeys'
+
+# Undercurl support (nvim LSP diagnostics)
+set -as terminal-overrides ',*:Smulx=\E[4::%p1%dm'
+set -as terminal-overrides ',*:Setulc=\E[58::2::%p1%{65536}%/%d::%p1%{256}%/%{255}%&%d::%p1%{255}%&%d:m'
+
+# iTerm2 (uncomment if using iTerm2 instead of Ghostty)
+# set -ag terminal-overrides ",xterm-256color:RGB"
+
+# --- Clipboard ---
+# macOS
+set -g @clipboard_cmd "pbcopy"
+# Linux (uncomment the right one)
+# set -g @clipboard_cmd "xclip -selection clipboard"
+# set -g @clipboard_cmd "wl-copy"
+
+# --- Paths ---
+# Where dotfiles repo lives (for sesh-picker script path)
+set -g @dotfiles_path "$HOME/dotfiles"
