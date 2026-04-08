@@ -1,0 +1,38 @@
+# ~/.zshrc.local — Machine-specific overrides
+# Copy to ~/.zshrc.local and edit for this machine.
+# This file is sourced by ~/.zshrc and is gitignored.
+
+# --- Identity / Paths ---
+# Obsidian vault location (used by ops, oo alias, sesh scripts)
+export OSTRICH_VAULT="$HOME/Documents/ObsidianSyncedVaults/SecondBrain"
+
+# HomeLab repo path (used by engineering.sh session script)
+export HOMELAB_PATH="$HOME/HomeLab/rani-homelab-v2"
+
+# --- SSH Agent ---
+# 1Password SSH agent (comment out if not using 1Password)
+export SSH_AUTH_SOCK=~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock
+
+# --- Conda ---
+# Uncomment if anaconda/miniconda is installed
+# if [ -f "$HOME/anaconda3/bin/conda" ]; then
+#     __conda_setup="$("$HOME/anaconda3/bin/conda" 'shell.zsh' 'hook' 2> /dev/null)"
+#     if [ $? -eq 0 ]; then
+#         eval "$__conda_setup"
+#     else
+#         [ -f "$HOME/anaconda3/etc/profile.d/conda.sh" ] && . "$HOME/anaconda3/etc/profile.d/conda.sh"
+#     fi
+#     unset __conda_setup
+# fi
+
+# --- Homebrew extras ---
+# Uncomment if using Homebrew's curl over system curl
+# export PATH="/opt/homebrew/opt/curl/bin:$PATH"
+
+# --- Hardware ---
+# Brother QL-800 label printer (comment out if not connected)
+# export BROTHER_QL_PRINTER="usb://0x04f9:0x209b"
+# export BROTHER_QL_MODEL="QL-800"
+
+# --- Tool aliases (only if installed) ---
+# command -v task-master >/dev/null && alias tm='task-master' && alias taskmaster='task-master'
