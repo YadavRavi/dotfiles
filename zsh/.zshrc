@@ -103,6 +103,17 @@ alias lt='eza --tree --group-directories-first --icons'
 alias tree='eza --tree --group-directories-first --icons'
 alias oo='cd $HOME/Documents/ObsidianSyncedVaults/SecondBrain/'
 alias bup='brew update && brew upgrade && exec zsh'
+function ops() {
+  if [ -n "$TMUX" ]; then
+    sesh connect LCARS
+  elif tmux has-session -t LCARS 2>/dev/null; then
+    tmux attach -t LCARS
+  else
+    tmux new-session -d -s LCARS -c ~/Documents/ObsidianSyncedVaults/SecondBrain \
+      && ~/dotfiles/tmux/scripts/lcars.sh \
+      && tmux attach -t LCARS
+  fi
+}
 command -v nvim >/dev/null && alias nfz='nvim $(fzf -m --preview="bat --color=always {}")'
 
 # yazi wrapper function
@@ -161,13 +172,16 @@ if command -v zellij >/dev/null; then
             session_line=$(zellij list-sessions --no-formatting 2>/dev/null | grep "^${name} ")
 
             if [ -z "$session_line" ]; then
-                open -na Ghostty.app --args --theme="$theme" \
+                open -na Ghostty.app --args --title="$name" --theme="$theme" \
                     -e zellij --session "$name" --new-session-with-layout "$layout_file"
             elif echo "$session_line" | grep -q "EXITED"; then
-                open -na Ghostty.app --args --theme="$theme" \
-                    -e zellij attach "$name" --force-run-commands
+                # Kill exited session and start fresh — resurrection via
+                # --force-run-commands triggers "Plugin not stored in memory" crash
+                zellij delete-session "$name" 2>/dev/null
+                open -na Ghostty.app --args --title="$name" --theme="$theme" \
+                    -e zellij --session "$name" --new-session-with-layout "$layout_file"
             else
-                open -na Ghostty.app --args --theme="$theme" \
+                open -na Ghostty.app --args --title="$name" --theme="$theme" \
                     -e zellij attach "$name"
             fi
         }
@@ -204,7 +218,7 @@ if command -v zellij >/dev/null; then
                     if [ -z "$line" ]; then
                         printf "  %-15s %s\n" "$session" "[not created]"
                     elif echo "$line" | grep -q "EXITED"; then
-                        printf "  %-15s %s\n" "$session" "[exited — will resurrect]"
+                        printf "  %-15s %s\n" "$session" "[exited — will recreate]"
                     elif echo "$line" | grep -q "current"; then
                         printf "  %-15s %s\n" "$session" "[active — current]"
                     else
@@ -228,20 +242,21 @@ if command -v zellij >/dev/null; then
         esac
     }
 
-    # Auto-start: run LCARS directly in the current window (default theme).
-    # Use "Captain all" or "Captain astro" to open additional themed windows.
-    if [[ -z "$ZELLIJ" ]]; then
-        _captain_auto_layout="$HOME/.config/zellij/layouts/lcars.kdl"
-        _captain_auto_sess=$(zellij list-sessions --no-formatting 2>/dev/null | grep "^LCARS ")
-        if [ -z "$_captain_auto_sess" ]; then
-            zellij --session "LCARS" --new-session-with-layout "$_captain_auto_layout"
-        elif echo "$_captain_auto_sess" | grep -q "EXITED"; then
-            zellij attach "LCARS" --force-run-commands
-        else
-            zellij attach "LCARS"
-        fi
-        unset _captain_auto_layout _captain_auto_sess
-    fi
+    # Auto-start: DISABLED for tmux+sesh comparison (was Zellij auto-launch)
+    # Uncomment to restore Zellij auto-start, or remove after migration.
+    # if [[ -z "$ZELLIJ" ]]; then
+    #     _captain_auto_layout="$HOME/.config/zellij/layouts/lcars.kdl"
+    #     _captain_auto_sess=$(zellij list-sessions --no-formatting 2>/dev/null | grep "^LCARS ")
+    #     if [ -z "$_captain_auto_sess" ]; then
+    #         zellij --session "LCARS" --new-session-with-layout "$_captain_auto_layout"
+    #     elif echo "$_captain_auto_sess" | grep -q "EXITED"; then
+    #         zellij delete-session "LCARS" 2>/dev/null
+    #         zellij --session "LCARS" --new-session-with-layout "$_captain_auto_layout"
+    #     else
+    #         zellij attach "LCARS"
+    #     fi
+    #     unset _captain_auto_layout _captain_auto_sess
+    # fi
 fi
 
 export PATH="/opt/homebrew/opt/curl/bin:$PATH"

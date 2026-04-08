@@ -9,6 +9,9 @@ local options = {
     typescriptreact = { "prettier" },
     json = { "prettier" },
     python = { "ruff_format" },
+    go = { "goimports", "gofmt" },
+    yaml = { "prettier" },
+    markdown = { "prettier" },
   },
 
   format_on_save = {
@@ -18,4 +21,4 @@ local options = {
   },
 }
 
-require("conform").setup(options)
+return options

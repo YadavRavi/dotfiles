@@ -7,12 +7,10 @@ return {
 
   {
     "neovim/nvim-lspconfig",
-    event = { "BufReadPost", "BufNewFile" },
-    config = function()
-      require "configs.lspconfig"
-    end,
+    lazy = false,
+    priority = 900,
   },
-  
+
   {
    "williamboman/mason.nvim",
    opts = {
@@ -25,37 +23,35 @@ return {
       "prettier",
       "pyright",
       "ruff",
+      "gopls",
+      "goimports",
+      "yaml-language-server",
+      "dockerfile-language-server",
     },
    },
   },
 
   {
    "nvim-treesitter/nvim-treesitter",
-   opts = {
-    ensure_installed = {
-      "vim",
-      "lua",
-      "vimdoc",
-      "html",
-      "css",
-      "javascript",
-      "typescript",
-      "tsx",
-      "python",
-    },
-   },
+   branch = "main",
+   lazy = false,
+   build = ":TSUpdate",
+   config = function()
+     require("nvim-treesitter").install({
+       "vim", "lua", "vimdoc", "html", "css",
+       "javascript", "typescript", "tsx", "python",
+       "go", "gomod", "gosum", "gowork",
+       "yaml", "dockerfile", "markdown", "markdown_inline",
+       "toml", "bash",
+     })
+   end,
   },
--- lightspeed.nvim
  {
-  'ggandor/lightspeed.nvim',
+  url = "https://codeberg.org/andyg/leap.nvim",
   event = 'VimEnter',
   config = function()
-    require('lightspeed').setup({
-      ignore_case = false,
-      exit_after_idle_msecs = { unlabeled = nil, labeled = nil },
-      -- Avoid conflicts with semicolon mapping
-      repeat_ft_with_target_char = false,
-    })
+    vim.keymap.set({ 'n', 'x', 'o' }, 's', '<Plug>(leap)')
+    vim.keymap.set('n', 'S', '<Plug>(leap-from-window)')
   end,
  },
 

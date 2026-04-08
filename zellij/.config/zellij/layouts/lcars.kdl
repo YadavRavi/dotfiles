@@ -1,3 +1,19 @@
+// ═══════════════════════════════════════════════════════════════════════════════
+// LCARS Bridge Layout
+// ═══════════════════════════════════════════════════════════════════════════════
+// Launch:  zellij -n lcars.kdl -s lcars
+// Attach:  zellij attach lcars
+//
+// Architecture: 3 tabs replace 7 Ghostty windows.
+// Skill routing in Claude handles station switching — /commands load context.
+//
+// Tabs (Ctrl+t → 1/2/3):
+//   1 "Ops"   — Daily driver. Claude + reference panes. All /commands work here.
+//   2 "Lab"   — Deep analysis. Shell ready; type `claude` for long sessions
+//               (DPP assessments, org diagnoses, competitive scans).
+//   3 "Shell" — Plain zsh for file ops, git, bat, scripts.
+// ═══════════════════════════════════════════════════════════════════════════════
+
 layout {
     default_tab_template {
         pane size=1 borderless=true {
@@ -5,14 +21,45 @@ layout {
         }
         children
     }
-    pane split_direction="vertical" size="40%" {
-        pane name="2ndBrain" cwd="/Users/raviyadav/Documents/ObsidianSyncedVaults/SecondBrain"
-        pane name="TRACE" {
-            command "bash"
-            args "-c" "exec nvim $(ls -t $HOME/Documents/ObsidianSyncedVaults/SecondBrain/daily-logs/$(date +%Y)/*.md 2>/dev/null | head -1)"
+
+    // ─────────────────────────────────────────────────────────────────────────
+    // Tab 1: Ops — main LCARS session
+    // Top-left: vault filesystem listing (ls -al)
+    // Top-right: today's daily log in nvim
+    // Bottom: Claude Code full-width (60% height, focused)
+    // ─────────────────────────────────────────────────────────────────────────
+    tab name="Ops" focus=true {
+        pane split_direction="horizontal" {
+            pane split_direction="vertical" size="40%" {
+                pane name="vault" cwd="/Users/raviyadav/Documents/ObsidianSyncedVaults/SecondBrain" {
+                    command "bash"
+                    args "-c" "ls -al"
+                }
+                pane name="trace" {
+                    command "bash"
+                    args "-c" "exec nvim $(ls -t $HOME/Documents/ObsidianSyncedVaults/SecondBrain/daily-logs/$(date +%Y)/*.md 2>/dev/null | head -1)"
+                }
+            }
+            pane name="lcars" size="60%" focus=true cwd="/Users/raviyadav/Documents/ObsidianSyncedVaults/SecondBrain" {
+                command "claude"
+            }
         }
     }
-    pane name="LCARS" size="60%" focus=true cwd="/Users/raviyadav/Documents/ObsidianSyncedVaults/SecondBrain" {
-        command "claude"
+
+    // ─────────────────────────────────────────────────────────────────────────
+    // Tab 2: Lab — deep analysis (isolated context)
+    // Starts as shell. Type `claude` when starting a deep session.
+    // Use for: /dpp-assess, /org-diagnose, /stratops-scan, /biometrics-*
+    // ─────────────────────────────────────────────────────────────────────────
+    tab name="Lab" {
+        pane name="lab" cwd="/Users/raviyadav/Documents/ObsidianSyncedVaults/SecondBrain"
+    }
+
+    // ─────────────────────────────────────────────────────────────────────────
+    // Tab 3: Shell — utilities, no Claude
+    // File ops, git, bat for reading, scripts, ad-hoc commands
+    // ─────────────────────────────────────────────────────────────────────────
+    tab name="Shell" {
+        pane name="shell" cwd="/Users/raviyadav/Documents/ObsidianSyncedVaults/SecondBrain"
     }
 }

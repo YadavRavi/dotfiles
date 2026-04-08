@@ -1,6 +1,8 @@
 -- Neovim 0.11+ native LSP configuration
 -- See :help lspconfig-nvim-0.11
 
+require("nvchad.configs.lspconfig").defaults()
+
 -- Servers with default config
 vim.lsp.config("html", {})
 vim.lsp.config("cssls", {})
@@ -41,5 +43,21 @@ vim.lsp.config("pyright", {
   },
 })
 
+-- Go
+vim.lsp.config("gopls", {
+  settings = {
+    gopls = {
+      analyses = { unusedparams = true },
+      staticcheck = true,
+    },
+  },
+})
+
+-- YAML
+vim.lsp.config("yamlls", {})
+
+-- Dockerfile
+vim.lsp.config("dockerls", {})
+
 -- Enable all configured servers
-vim.lsp.enable({ "html", "cssls", "ts_ls", "lua_ls", "pyright" })
+vim.lsp.enable({ "html", "cssls", "ts_ls", "lua_ls", "pyright", "gopls", "yamlls", "dockerls" })
