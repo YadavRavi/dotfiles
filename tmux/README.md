@@ -16,6 +16,18 @@ sesh connect Engineering
 
 If tmux isn't running, sesh starts it automatically. If the session exists, it reattaches.
 
+## Setup on a New Machine
+
+```bash
+cd ~/dotfiles
+./setup.sh
+```
+
+This stows all packages and generates machine-specific overlay files from templates.
+Edit the overlay files for your machine — they are gitignored and never overwritten by sync.
+
+See `local-templates/` for all available overlays.
+
 ## Contexts
 
 | Name | Layout | Directory |
@@ -85,6 +97,7 @@ Two layers, matching former Zellij bindings:
 └── README.md              # This file
 
 ~/.config/tmux/tmux.conf   # → ~/dotfiles/tmux/tmux.conf
+~/.config/tmux/local.conf  # → machine-specific (gitignored)
 ~/.config/sesh/sesh.toml   # Session declarations
 ~/.claude/keybindings.json # Alt+O unbound (use /fast)
 ```
@@ -99,7 +112,7 @@ Two layers, matching former Zellij bindings:
 | fzf | `brew install fzf` | Fuzzy finder |
 | TPM | `~/.tmux/plugins/tpm` | Plugin manager |
 
-**Plugins (via TPM):** tmux-sensible, catppuccin/tmux, tmux-resurrect, tmux-continuum
+**Plugins (via TPM):** catppuccin/tmux, tmux-resurrect, tmux-continuum
 
 ## Ghostty Requirement
 
