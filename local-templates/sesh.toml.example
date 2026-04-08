@@ -1,0 +1,22 @@
+# ~/.config/sesh/sesh.toml — Session definitions
+# Copy to ~/.config/sesh/sesh.toml and edit paths for this machine.
+# sesh.toml does NOT support includes or env vars — edit paths directly.
+
+[[session]]
+name = "LCARS"
+path = "~/Documents/ObsidianSyncedVaults/SecondBrain"
+startup_script = "~/dotfiles/tmux/scripts/lcars.sh"
+
+[[session]]
+name = "DPP"
+path = "~/Documents/ObsidianSyncedVaults/SecondBrain/kb/dpp"
+startup_script = "~/dotfiles/tmux/scripts/dpp.sh"
+
+[[session]]
+name = "Astrometrics"
+path = "~/Documents/ObsidianSyncedVaults/SecondBrain"
+
+[[session]]
+name = "Engineering"
+path = "~/HomeLab/rani-homelab-v2"
+startup_script = "~/dotfiles/tmux/scripts/engineering.sh"
