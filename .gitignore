@@ -1,0 +1,12 @@
+# Claude Code instructions
+CLAUDE.md
+.gitignore
+
+# Local overlay files (machine-specific, never synced)
+*.local
+*.local.*
+!local-templates/*
+
+# Stow artifacts
+.DS_Store
+*.bak

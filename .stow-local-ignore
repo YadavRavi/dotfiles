@@ -3,4 +3,7 @@
 \.gitignore
 ^/README.*
 ^/LICENSE.*
-^/COPYING
+^/COPYING
+^/docs
+^/local-templates
+^/setup\.sh
