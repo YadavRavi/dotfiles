@@ -10,4 +10,3 @@ opt.shiftwidth = 2
 opt.wrap = false
 opt.swapfile = false
 opt.background = "dark"
-opt.backspace = "indent,eol,start"

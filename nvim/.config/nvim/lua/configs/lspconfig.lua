@@ -59,5 +59,8 @@ vim.lsp.config("yamlls", {})
 -- Dockerfile
 vim.lsp.config("dockerls", {})
 
+-- Bash/Shell
+vim.lsp.config("bashls", {})
+
 -- Enable all configured servers
-vim.lsp.enable({ "html", "cssls", "ts_ls", "lua_ls", "pyright", "gopls", "yamlls", "dockerls" })
+vim.lsp.enable({ "html", "cssls", "ts_ls", "lua_ls", "pyright", "gopls", "yamlls", "dockerls", "bashls" })

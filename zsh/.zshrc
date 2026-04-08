@@ -22,26 +22,23 @@ source "${ZINIT_HOME}/zinit.zsh"
 
 # Plugins go here:
 
-# Syntax Highlighting
-zinit light zsh-users/zsh-syntax-highlighting
 # ZSH Completion
 zinit light zsh-users/zsh-completions
 # Load Completions
-autoload -U compinit && compinit
+autoload -U compinit && compinit -C
 zinit cdreplay -q
-
-# zoxide will be initialized later with cd override
 
 # ZSH Autosuggestions
 zinit light zsh-users/zsh-autosuggestions
-
-# fzf will be initialized later
 
 # FZF Tab
 zinit light Aloxaf/fzf-tab
 
 # EZA replacement for ls
 zinit light z-shell/zsh-eza
+
+# Syntax Highlighting (must be last)
+zinit light zsh-users/zsh-syntax-highlighting
 
 # Add in snippets
 zinit snippet OMZP::git
@@ -50,27 +47,26 @@ zinit snippet OMZP::command-not-found
 
 
 # >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/Users/raviyadav/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/Users/raviyadav/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/Users/raviyadav/anaconda3/etc/profile.d/conda.sh"
+if [ -f "$HOME/anaconda3/bin/conda" ]; then
+    __conda_setup="$("$HOME/anaconda3/bin/conda" 'shell.zsh' 'hook' 2> /dev/null)"
+    if [ $? -eq 0 ]; then
+        eval "$__conda_setup"
     else
-        export PATH="/Users/raviyadav/anaconda3/bin:$PATH"
+        if [ -f "$HOME/anaconda3/etc/profile.d/conda.sh" ]; then
+            . "$HOME/anaconda3/etc/profile.d/conda.sh"
+        else
+            export PATH="$HOME/anaconda3/bin:$PATH"
+        fi
     fi
+    unset __conda_setup
 fi
-unset __conda_setup
 # <<< conda initialize <<<
 # Keybindings
-# Note: Ctrl+p and Ctrl+n are intercepted by Zellij (pane/resize modes).
-# Use Ctrl+r (fzf fuzzy search) or Layer 2 arrow keys for history browsing.
 bindkey '^y' autosuggest-accept
 
 
 # History
-HISTSIZE=5000
+HISTSIZE=50000
 HISTFILE=~/.zsh_history
 SAVEHIST=$HISTSIZE
 HISTDUP=erase
@@ -131,133 +127,9 @@ fi
 # Initialize fzf
 command -v fzf >/dev/null && eval "$(fzf --zsh)"
 
-# iTerm2 shell integration
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+# iTerm2 shell integration (only in iTerm2)
+[[ "$TERM_PROGRAM" == "iTerm.app" ]] && test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
-# Zellij helper functions and Captain session manager
-if command -v zellij >/dev/null; then
-    function zr () { zellij run --name "$*" -- zsh -ic "$*";}
-    function zrf () { zellij run --name "$*" --floating -- zsh -ic "$*";}
-    function zri () { zellij run --name "$*" --in-place -- zsh -ic "$*";}
-    function ze () { zellij edit "$*";}
-    function zef () { zellij edit --floating "$*";}
-    function zei () { zellij edit --in-place "$*";}
-    function zpipe () {
-      if [ -z "$1" ]; then
-        zellij pipe;
-      else
-        zellij pipe -p $1;
-      fi
-    }
-
-    function Captain () {
-        local LAYOUTS="$HOME/.config/zellij/layouts"
-
-        _captain_start_session() {
-            local name="$1"
-            local layout="$2"
-            local theme="$3"
-            local layout_file="$LAYOUTS/$layout.kdl"
-
-            # Inside zellij: open native session-manager for switching
-            if [ -n "$ZELLIJ" ]; then
-                echo "Opening session manager — switch to $name (or any session)"
-                zellij action launch-or-focus-plugin "session-manager" --floating --move-to-focused-tab
-                return 0
-            fi
-
-            # Outside zellij: launch themed Ghostty window with zellij session
-            # macOS: `ghostty` CLI can't launch windows — must use `open -na Ghostty.app --args`
-            local session_line
-            session_line=$(zellij list-sessions --no-formatting 2>/dev/null | grep "^${name} ")
-
-            if [ -z "$session_line" ]; then
-                open -na Ghostty.app --args --title="$name" --theme="$theme" \
-                    -e zellij --session "$name" --new-session-with-layout "$layout_file"
-            elif echo "$session_line" | grep -q "EXITED"; then
-                # Kill exited session and start fresh — resurrection via
-                # --force-run-commands triggers "Plugin not stored in memory" crash
-                zellij delete-session "$name" 2>/dev/null
-                open -na Ghostty.app --args --title="$name" --theme="$theme" \
-                    -e zellij --session "$name" --new-session-with-layout "$layout_file"
-            else
-                open -na Ghostty.app --args --title="$name" --theme="$theme" \
-                    -e zellij attach "$name"
-            fi
-        }
-
-        case "${1:-status}" in
-            lcars|LCARS)
-                _captain_start_session "LCARS" "lcars" "Captain LCARS"
-                ;;
-            astrometrics|Astrometrics|astro)
-                _captain_start_session "Astrometrics" "astrometrics" "Captain Astrometrics"
-                ;;
-            engineering|Engineering|eng)
-                _captain_start_session "Engineering" "engineering" "Captain Engineering"
-                ;;
-            daystrom|Daystrom|dst)
-                _captain_start_session "Daystrom" "daystrom" "Captain Daystrom"
-                ;;
-            all)
-                _captain_start_session "LCARS" "lcars" "Captain LCARS"
-                sleep 0.3
-                _captain_start_session "Astrometrics" "astrometrics" "Captain Astrometrics"
-                sleep 0.3
-                _captain_start_session "Engineering" "engineering" "Captain Engineering"
-                sleep 0.3
-                _captain_start_session "Daystrom" "daystrom" "Captain Daystrom"
-                ;;
-            status)
-                echo "Captain's Log — Session Status"
-                echo "=============================="
-                local all_sessions
-                all_sessions=$(zellij list-sessions --no-formatting 2>/dev/null)
-                for session in LCARS Astrometrics Engineering Daystrom; do
-                    local line=$(echo "$all_sessions" | grep "^${session} ")
-                    if [ -z "$line" ]; then
-                        printf "  %-15s %s\n" "$session" "[not created]"
-                    elif echo "$line" | grep -q "EXITED"; then
-                        printf "  %-15s %s\n" "$session" "[exited — will recreate]"
-                    elif echo "$line" | grep -q "current"; then
-                        printf "  %-15s %s\n" "$session" "[active — current]"
-                    else
-                        printf "  %-15s %s\n" "$session" "[active]"
-                    fi
-                done
-                echo ""
-                echo "Usage: Captain <lcars|astrometrics|engineering|daystrom|all|status>"
-                ;;
-            *)
-                echo "Usage: Captain <lcars|astrometrics|engineering|daystrom|all|status>"
-                echo ""
-                echo "Sessions:"
-                echo "  lcars          LCARS daily workflow (SecondBrain)        \e[33m■\e[0m gold"
-                echo "  astrometrics   Advisory & DPP (SecondBrain)              \e[34m■\e[0m blue"
-                echo "  engineering    HomeLab engineering (rani-homelab-v2)      \e[31m■\e[0m red"
-                echo "  daystrom       Data & AI Engineering (SecondBrain)       \e[32m■\e[0m green"
-                echo "  all            Launch all four sessions"
-                echo "  status         Show session status"
-                ;;
-        esac
-    }
-
-    # Auto-start: DISABLED for tmux+sesh comparison (was Zellij auto-launch)
-    # Uncomment to restore Zellij auto-start, or remove after migration.
-    # if [[ -z "$ZELLIJ" ]]; then
-    #     _captain_auto_layout="$HOME/.config/zellij/layouts/lcars.kdl"
-    #     _captain_auto_sess=$(zellij list-sessions --no-formatting 2>/dev/null | grep "^LCARS ")
-    #     if [ -z "$_captain_auto_sess" ]; then
-    #         zellij --session "LCARS" --new-session-with-layout "$_captain_auto_layout"
-    #     elif echo "$_captain_auto_sess" | grep -q "EXITED"; then
-    #         zellij delete-session "LCARS" 2>/dev/null
-    #         zellij --session "LCARS" --new-session-with-layout "$_captain_auto_layout"
-    #     else
-    #         zellij attach "LCARS"
-    #     fi
-    #     unset _captain_auto_layout _captain_auto_sess
-    # fi
-fi
 
 export PATH="/opt/homebrew/opt/curl/bin:$PATH"
 
@@ -281,19 +153,16 @@ else
 fi
 
 # Initialize thefuck
-command -v thefuck >/dev/null && eval $(thefuck --alias)
+command -v thefuck >/dev/null && eval "$(thefuck --alias)"
 
-# Created by `pipx` on 2025-06-13 14:30:17
-export PATH="$PATH:/Users/raviyadav/.local/bin"
+# Local binaries
+export PATH="$HOME/.local/bin:$PATH"
 
-# Task Master aliases added on 6/30/2025
+# Task Master aliases
 alias tm='task-master'
 alias taskmaster='task-master'
 
 # Brother QL-800 Label Printer
-
-# Brother QL-800 Label Printer
-export PATH="$HOME/.local/bin:$PATH"
 
 # Brother QL-800 Label Printer
 export BROTHER_QL_PRINTER="usb://0x04f9:0x209b"

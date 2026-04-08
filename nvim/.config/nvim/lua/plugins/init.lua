@@ -27,6 +27,7 @@ return {
       "goimports",
       "yaml-language-server",
       "dockerfile-language-server",
+      "bash-language-server",
     },
    },
   },
