@@ -1,0 +1,10 @@
+-- ~/.config/nvim/lua/configs/local.lua
+-- Machine-specific NeoVim overrides. Copy and edit for this machine.
+-- This file is pcall'd — if absent, nothing happens.
+
+-- Extra LSP servers for company work (add to the enable list)
+-- vim.lsp.config("jdtls", {})  -- Java
+-- vim.lsp.enable({ "jdtls" })
+
+-- Override Mason ensure_installed if needed
+-- (Mason merges, doesn't replace — just add what's missing)

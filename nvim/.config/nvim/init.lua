@@ -40,3 +40,6 @@ vim.schedule(function()
   require "mappings"
   require "configs.lspconfig"
 end)
+
+-- Machine-specific overrides (gitignored)
+pcall(require, "configs.local")
