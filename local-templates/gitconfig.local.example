@@ -1,0 +1,23 @@
+# ~/.gitconfig.local — Machine-specific git identity
+# Copy to ~/.gitconfig.local and edit for this machine.
+
+[user]
+	name = Ravi Yadav
+	email = ravi.yadav@me.com
+	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDC++rytrQGWAc4+C7hK6nRvhk/dSpg4QvHG/txeyDOZ
+
+[gpg]
+	format = ssh
+
+[gpg "ssh"]
+	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
+
+# Company laptop example:
+# [user]
+# 	name = Ravi Yadav
+# 	email = ravi.yadav@sap.com
+# 	signingkey = ssh-ed25519 <company-key-here>
+# [gpg]
+# 	format = ssh
+# [gpg "ssh"]
+# 	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
