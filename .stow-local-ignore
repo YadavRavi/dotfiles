@@ -5,5 +5,10 @@
 ^/LICENSE.*
 ^/COPYING
 ^/docs
-^/local-templates
+^/bootstrap
+^/scripts
+^/profiles
+^/overlays
 ^/setup\.sh
+^/CLAUDE\.md
+^/\.dotfiles-profile

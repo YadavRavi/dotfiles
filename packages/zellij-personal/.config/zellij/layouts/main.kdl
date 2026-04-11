@@ -1,0 +1,51 @@
+// main.kdl — 5-context daily driver layout.
+//
+// Switches: use Ctrl+t <digit> (existing config.kdl tab mode).
+// Cold start: `zj` shell function creates session and attaches with this layout.
+//
+// Structure per tab (except LCARS): a "context" template with
+//   top-left : free shell in the tab's cwd
+//   top-right: nvim
+//   bottom   : claude code
+//
+// LCARS is an exception — its top-right pane auto-opens today's daily log
+// (preserving the behavior from the old lcars.kdl Ops tab).
+
+layout {
+    default_tab_template {
+        pane size=1 borderless=true {
+            plugin location="zellij:compact-bar"
+        }
+        children
+    }
+
+    pane_template name="context" {
+        pane split_direction="horizontal" {
+            pane split_direction="vertical" size="50%" {
+                pane                              // top-left: free shell
+                pane command="nvim"               // top-right: nvim
+            }
+            pane command="claude" size="50%"      // bottom-half: claude code
+        }
+    }
+
+    // Tab 1: LCARS — preserves the daily-log auto-open trick from lcars.kdl
+    tab name="LCARS" cwd="/Users/raviyadav/Documents/ObsidianSyncedVaults/SecondBrain" {
+        pane split_direction="horizontal" {
+            pane split_direction="vertical" size="50%" {
+                pane                              // top-left: free shell
+                pane {                            // top-right: auto-open today's daily log
+                    command "bash"
+                    args "-c" "exec nvim $(ls -t /Users/raviyadav/Documents/ObsidianSyncedVaults/SecondBrain/daily-logs/$(date +%Y)/*.md 2>/dev/null | head -1)"
+                }
+            }
+            pane command="claude" size="50%"      // bottom-half: claude code
+        }
+    }
+
+    // Tabs 2-5: uniform context template
+    tab name="DPP"         cwd="/Users/raviyadav/Documents/ObsidianSyncedVaults/SecondBrain/kb/dpp"  { context; }
+    tab name="AI-Natives"  cwd="/Users/raviyadav/Projects/AI-Natives"                                 { context; }
+    tab name="Counselor"   cwd="/Users/raviyadav/Documents/ObsidianSyncedVaults/SecondBrain/kb"       { context; }
+    tab name="Engineering" cwd="/Users/raviyadav/HomeLab/rani-homelab-v2"                             { context; }
+}

@@ -1,0 +1,19 @@
+# Dotfiles profile: personal
+# One stow package per line. Blank lines and # comments are ignored.
+# Packages must exist under packages/<name>/.
+
+# --- Shared core ---
+zsh
+git
+ghostty
+zellij
+nvim
+ripgrep
+gh
+
+# --- Personal-only ---
+zellij-personal
+
+# --- Dormant fallbacks (installed but NOT stowed by default) ---
+# tmux is intentionally omitted. To re-activate the dormant fallback:
+#   cd ~/dotfiles/packages && stow --target=$HOME tmux

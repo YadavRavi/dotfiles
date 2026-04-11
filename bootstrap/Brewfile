@@ -1,0 +1,40 @@
+# Brewfile — single file, profile-gated via DOTFILES_PROFILE env var.
+# Usage:
+#   DOTFILES_PROFILE=personal brew bundle --file=~/dotfiles/bootstrap/Brewfile
+#   DOTFILES_PROFILE=work     brew bundle --file=~/dotfiles/bootstrap/Brewfile
+
+tap "homebrew/bundle"
+
+# --- Core (all machines) ---
+brew "zsh"
+brew "starship"
+brew "zoxide"
+brew "fzf"
+brew "bat"
+brew "eza"
+brew "fd"
+brew "ripgrep"
+brew "yazi"
+brew "jq"
+brew "git"
+brew "jj"
+brew "stow"
+brew "neovim"
+brew "zellij"
+brew "tmux"          # dormant fallback
+brew "lazygit"
+brew "git-delta"
+
+cask "ghostty"
+
+# --- Personal-only ---
+if ENV["DOTFILES_PROFILE"] == "personal"
+  brew "1password-cli"
+  cask "1password"
+  cask "obsidian"
+end
+
+# --- Work-only ---
+if ENV["DOTFILES_PROFILE"] == "work"
+  # Work-specific tools added during Plan 6 onboarding
+end

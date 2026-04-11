@@ -1,0 +1,23 @@
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+[commit]
+	gpgsign = true
+[include]
+	path = ~/.gitconfig.local
+
+# --- Identity split via includeIf (spec §6) ---
+[includeIf "gitdir:~/HomeLab/"]
+    path = ~/.gitconfig-personal
+[includeIf "gitdir:~/Projects/"]
+    path = ~/.gitconfig-personal
+[includeIf "gitdir:~/dotfiles/"]
+    path = ~/.gitconfig-personal
+[includeIf "gitdir:~/Documents/ObsidianSyncedVaults/"]
+    path = ~/.gitconfig-personal
+
+# Work identity (Plan 6 creates ~/.gitconfig-work on the work laptop):
+[includeIf "gitdir:~/work/"]
+    path = ~/.gitconfig-work

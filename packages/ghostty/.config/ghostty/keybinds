@@ -1,0 +1,15 @@
+# Ghostty keybinds — preserve right Option for German special chars,
+# unbind cmd-based tab/window management so Zellij owns it.
+macos-option-as-alt = left
+macos-titlebar-style = tabs
+
+# Shell integration
+shell-integration = zsh
+shell-integration-features = cursor,sudo,title
+
+# Unbinds — let Zellij handle all tab/window management inside the terminal
+keybind = cmd+t=unbind
+keybind = cmd+n=unbind
+keybind = cmd+w=unbind
+keybind = cmd+opt+left=unbind
+keybind = cmd+opt+right=unbind

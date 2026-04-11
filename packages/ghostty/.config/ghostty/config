@@ -1,0 +1,7 @@
+# Ghostty entrypoint config. Layered:
+#   theme     → font + palette (stowed)
+#   keybinds  → passthrough rules (stowed)
+#   local     → machine-specific overrides (gitignored, created by setup.sh)
+config-file = theme
+config-file = keybinds
+config-file = ?local

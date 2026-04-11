@@ -1,12 +1,8 @@
-# Claude Code instructions
-CLAUDE.md
-.gitignore
+# Machine-specific overlay marker (written by setup.sh, never committed)
+.dotfiles-profile
 
-# Local overlay files (machine-specific, never synced)
-*.local
-*.local.*
-!local-templates/*
-
-# Stow artifacts
+# macOS cruft
 .DS_Store
-*.bak
+
+# Legacy local files (retired in Plan 1)
+local-templates/
