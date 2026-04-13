@@ -36,5 +36,5 @@ end
 
 # --- Work-only ---
 if ENV["DOTFILES_PROFILE"] == "work"
-  # Work-specific tools added during Plan 6 onboarding
+  brew "syncthing"
 end

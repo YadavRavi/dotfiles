@@ -1,0 +1,15 @@
+# ~/.gitconfig-work — Work git identity
+# Copy to ~/.gitconfig-work and edit for this machine.
+# Automatically included via .gitconfig includeIf for ~/work/ repos.
+
+[user]
+    name = Ravi Yadav
+    email = <work-email-here>
+
+# Uncomment if work uses commit signing
+# [commit]
+#     gpgsign = true
+# [gpg]
+#     format = ssh
+# [gpg "ssh"]
+#     program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
