@@ -3,8 +3,6 @@
 #   DOTFILES_PROFILE=personal brew bundle --file=~/dotfiles/bootstrap/Brewfile
 #   DOTFILES_PROFILE=work     brew bundle --file=~/dotfiles/bootstrap/Brewfile
 
-tap "homebrew/bundle"
-
 # --- Core (all machines) ---
 brew "zsh"
 brew "starship"
