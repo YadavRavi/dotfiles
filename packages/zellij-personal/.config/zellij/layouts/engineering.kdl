@@ -5,8 +5,8 @@ layout {
         }
         children
     }
-    pane name="Filesystem" size="30%" cwd="/Users/raviyadav/HomeLab/rani-homelab-v2"
-    pane name="Engineering" size="70%" focus=true cwd="/Users/raviyadav/HomeLab/rani-homelab-v2" {
+    pane name="Filesystem" size="30%" cwd="~/HomeLab/rani-homelab-v2"
+    pane name="Engineering" size="70%" focus=true cwd="~/HomeLab/rani-homelab-v2" {
         command "claude"
     }
 }

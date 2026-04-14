@@ -30,13 +30,13 @@ layout {
     }
 
     // Tab 1: LCARS — preserves the daily-log auto-open trick from lcars.kdl
-    tab name="LCARS" cwd="/Users/raviyadav/Documents/ObsidianSyncedVaults/SecondBrain" {
+    tab name="LCARS" cwd="~/Documents/ObsidianSyncedVaults/SecondBrain" {
         pane split_direction="horizontal" {
             pane split_direction="vertical" size="50%" {
                 pane                              // top-left: free shell
                 pane {                            // top-right: auto-open today's daily log
                     command "bash"
-                    args "-c" "exec nvim $(ls -t /Users/raviyadav/Documents/ObsidianSyncedVaults/SecondBrain/daily-logs/$(date +%Y)/*.md 2>/dev/null | head -1)"
+                    args "-c" "exec nvim $(ls -t ~/Documents/ObsidianSyncedVaults/SecondBrain/daily-logs/$(date +%Y)/*.md 2>/dev/null | head -1)"
                 }
             }
             pane command="claude" size="50%"      // bottom-half: claude code
@@ -44,8 +44,8 @@ layout {
     }
 
     // Tabs 2-5: uniform context template
-    tab name="DPP"         cwd="/Users/raviyadav/Documents/ObsidianSyncedVaults/SecondBrain/kb/dpp"  { context; }
-    tab name="AI-Natives"  cwd="/Users/raviyadav/Projects/AI-Natives"                                 { context; }
-    tab name="Counselor"   cwd="/Users/raviyadav/Documents/ObsidianSyncedVaults/SecondBrain/kb"       { context; }
-    tab name="Engineering" cwd="/Users/raviyadav/HomeLab/rani-homelab-v2"                             { context; }
+    tab name="DPP"         cwd="~/Documents/ObsidianSyncedVaults/SecondBrain/kb/dpp"  { context; }
+    tab name="AI-Natives"  cwd="~/Projects/AI-Natives"                                 { context; }
+    tab name="Counselor"   cwd="~/Documents/ObsidianSyncedVaults/SecondBrain/kb"       { context; }
+    tab name="Engineering" cwd="~/HomeLab/rani-homelab-v2"                             { context; }
 }

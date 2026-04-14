@@ -31,7 +31,7 @@ layout {
     tab name="Ops" focus=true {
         pane split_direction="horizontal" {
             pane split_direction="vertical" size="40%" {
-                pane name="vault" cwd="/Users/raviyadav/Documents/ObsidianSyncedVaults/SecondBrain" {
+                pane name="vault" cwd="~/Documents/ObsidianSyncedVaults/SecondBrain" {
                     command "bash"
                     args "-c" "ls -al"
                 }
@@ -40,7 +40,7 @@ layout {
                     args "-c" "exec nvim $(ls -t $HOME/Documents/ObsidianSyncedVaults/SecondBrain/daily-logs/$(date +%Y)/*.md 2>/dev/null | head -1)"
                 }
             }
-            pane name="lcars" size="60%" focus=true cwd="/Users/raviyadav/Documents/ObsidianSyncedVaults/SecondBrain" {
+            pane name="lcars" size="60%" focus=true cwd="~/Documents/ObsidianSyncedVaults/SecondBrain" {
                 command "claude"
             }
         }
@@ -52,7 +52,7 @@ layout {
     // Use for: /dpp-assess, /org-diagnose, /stratops-scan, /biometrics-*
     // ─────────────────────────────────────────────────────────────────────────
     tab name="Lab" {
-        pane name="lab" cwd="/Users/raviyadav/Documents/ObsidianSyncedVaults/SecondBrain"
+        pane name="lab" cwd="~/Documents/ObsidianSyncedVaults/SecondBrain"
     }
 
     // ─────────────────────────────────────────────────────────────────────────
@@ -60,6 +60,6 @@ layout {
     // File ops, git, bat for reading, scripts, ad-hoc commands
     // ─────────────────────────────────────────────────────────────────────────
     tab name="Shell" {
-        pane name="shell" cwd="/Users/raviyadav/Documents/ObsidianSyncedVaults/SecondBrain"
+        pane name="shell" cwd="~/Documents/ObsidianSyncedVaults/SecondBrain"
     }
 }

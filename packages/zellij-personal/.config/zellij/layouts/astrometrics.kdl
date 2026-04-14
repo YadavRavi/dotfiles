@@ -5,8 +5,8 @@ layout {
         }
         children
     }
-    pane name="Filesystem" size="30%" cwd="/Users/raviyadav/Documents/ObsidianSyncedVaults/SecondBrain/DPP-inbox"
-    pane name="Astrometrics" size="70%" focus=true cwd="/Users/raviyadav/Documents/ObsidianSyncedVaults/SecondBrain" {
+    pane name="Filesystem" size="30%" cwd="~/Documents/ObsidianSyncedVaults/SecondBrain/DPP-inbox"
+    pane name="Astrometrics" size="70%" focus=true cwd="~/Documents/ObsidianSyncedVaults/SecondBrain" {
         command "claude"
     }
 }
