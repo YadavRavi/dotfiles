@@ -33,6 +33,4 @@ if ENV["DOTFILES_PROFILE"] == "personal"
 end
 
 # --- Work-only ---
-if ENV["DOTFILES_PROFILE"] == "work"
-  brew "syncthing"
-end
+# (currently empty — vault sync handled by iCloud, no work-specific tools needed)
