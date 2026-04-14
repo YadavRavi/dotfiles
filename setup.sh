@@ -39,7 +39,7 @@ while IFS= read -r line || [[ -n "$line" ]]; do
     pkg="${pkg// /}"                 # strip whitespace
     [[ -z "$pkg" ]] && continue
     if [[ -d "$pkg" ]]; then
-        if stow --restow --target="$HOME" "$pkg" 2>/dev/null; then
+        if stow --restow --dir="$DOTFILES_DIR/packages" --target="$HOME" "$pkg" 2>/dev/null; then
             echo "  [stowed] $pkg"
         else
             echo "  [warn] $pkg stow failed — check for conflicts"
