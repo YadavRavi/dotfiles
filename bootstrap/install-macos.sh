@@ -40,6 +40,10 @@ echo "[ok] Homebrew present: $(brew --version | head -1)"
 echo "--- Running brew bundle (profile: $PROFILE) ---"
 DOTFILES_PROFILE="$PROFILE" brew bundle --file="$DOTFILES_DIR/bootstrap/Brewfile"
 
+# Verify nothing was silently skipped (brew bundle returns 0 on partial failures).
+echo "--- Verifying Brewfile bundle ---"
+DOTFILES_PROFILE="$PROFILE" brew bundle check --file="$DOTFILES_DIR/bootstrap/Brewfile" --verbose
+
 # --- 4. Stow packages ---
 echo "--- Running setup.sh $PROFILE ---"
 "$DOTFILES_DIR/setup.sh" "$PROFILE"

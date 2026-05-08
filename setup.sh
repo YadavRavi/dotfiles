@@ -31,6 +31,17 @@ echo "=== Dotfiles setup — profile: $PROFILE ==="
 echo "Dotfiles dir: $DOTFILES_DIR"
 echo
 
+# --- Precheck: vault path used by Zellij layouts ---
+if [[ "$PROFILE" == "work" || "$PROFILE" == "personal" ]]; then
+    VAULT="$HOME/Documents/ObsidianSyncedVaults/SecondBrain"
+    if [[ ! -e "$VAULT" ]]; then
+        echo "  [warn] vault path missing: $VAULT"
+        echo "         Zellij LCARS tab will silently fall back to \$HOME until this exists."
+        echo "         On work laptop: symlink to iCloud canonical (see ops-log 2026-04-14)."
+        echo
+    fi
+fi
+
 # --- Stow packages listed in the profile ---
 echo "--- Stowing packages ---"
 cd "$DOTFILES_DIR/packages"
@@ -39,10 +50,11 @@ while IFS= read -r line || [[ -n "$line" ]]; do
     pkg="${pkg// /}"                 # strip whitespace
     [[ -z "$pkg" ]] && continue
     if [[ -d "$pkg" ]]; then
-        if stow --restow --dir="$DOTFILES_DIR/packages" --target="$HOME" "$pkg" 2>/dev/null; then
+        if stow_err=$(stow --restow --dir="$DOTFILES_DIR/packages" --target="$HOME" "$pkg" 2>&1); then
             echo "  [stowed] $pkg"
         else
-            echo "  [warn] $pkg stow failed — check for conflicts"
+            echo "  [warn] $pkg stow failed:"
+            echo "$stow_err" | sed 's/^/    /'
         fi
     else
         echo "  [skip] $pkg (directory not found under packages/)"
