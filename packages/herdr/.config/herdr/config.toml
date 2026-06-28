@@ -1,0 +1,49 @@
+# Keybindings mirror the Zellij setup (Workman-DHk, yneo home row).
+# Herdr has ONE prefix (tmux-style), not Zellij's per-domain modes —
+# F12: dedicated physical key, tap once then the action letter.
+
+[keys]
+prefix = "f12" # dedicated key; also passes through Zellij unlocked, unlike ctrl+p
+
+# Panes — yneo directions, as in Zellij Ctrl+p mode
+focus_pane_left = "prefix+y"
+focus_pane_down = "prefix+n"
+focus_pane_up = "prefix+e"
+focus_pane_right = "prefix+o"
+split_horizontal = "prefix+d" # split down  (Zellij: d)
+split_vertical = "prefix+r"   # split right (Zellij: r)
+close_pane = "prefix+x"       # (Zellij: x)
+zoom = "prefix+f"             # fullscreen  (Zellij: f)
+rename_pane = "prefix+c"      # (Zellij: c)
+resize_mode = "ctrl+n"        # direct chord, matches Zellij Ctrl+n resize mode
+edit_scrollback = "prefix+v"  # (Zellij scroll-mode: v)
+
+# Workspaces play the role of the old Zellij tabs (LCARS/DPP/AI-Natives/Counselor/Engineering)
+switch_workspace = "prefix+1..9"    # (Zellij: Ctrl+t 1..5)
+next_workspace = "alt+o"            # (Zellij: Alt+O, needs Ghostty option-as-alt — already set)
+previous_workspace = "alt+e"        # (Zellij: Alt+E)
+
+# Tabs (views within a workspace) — shifted variants of the workspace keys
+new_tab = "prefix+a"                # (Zellij tab-mode: a)
+switch_tab = "prefix+shift+1..9"
+next_tab = "alt+shift+o"
+previous_tab = "alt+shift+e"
+
+# Session — Ctrl+q detaches (agents keep running), same finger as Zellij quit
+detach = "ctrl+q"
+
+# Displaced defaults (prefix+o / prefix+e now mean focus right / focus up)
+open_notification_target = "prefix+shift+o"
+
+# Navigate-mode local movement → yneo instead of hjkl
+navigate_pane_left = "y"
+navigate_pane_down = "n"
+navigate_pane_up = "e"
+navigate_pane_right = "o"
+
+[theme]
+name = "catppuccin" # Mocha — same palette as the Ghostty/Zellij setup
+
+[ui]
+show_agent_labels_on_pane_borders = true
+agent_panel_sort = "spaces"

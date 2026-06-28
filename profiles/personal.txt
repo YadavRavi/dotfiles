@@ -13,6 +13,8 @@ gh
 
 # --- Personal-only ---
 zellij-personal
+herdr           # agent-multiplexer eval (brew install herdr); F12 prefix, yneo keys
+herdr-personal  # main-layout.sh — 5-workspace bootstrap (vault paths)
 
 # --- Dormant fallbacks (installed but NOT stowed by default) ---
 # tmux is intentionally omitted. To re-activate the dormant fallback:
