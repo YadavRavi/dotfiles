@@ -1,3 +1,4 @@
+onboarding = false
 # Keybindings mirror the Zellij setup (Workman-DHk, yneo home row).
 # Herdr has ONE prefix (tmux-style), not Zellij's per-domain modes —
 # F12: dedicated physical key, tap once then the action letter.

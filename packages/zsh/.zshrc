@@ -162,16 +162,14 @@ zj() {
     zellij attach main 2>/dev/null || zellij -n main -s main
 }
 
-# --- Auto-exec into Zellij on interactive Ghostty launch ---
-# Guards: only inside interactive shell, not already inside Zellij,
-#         only in Ghostty, only if zellij installed (capability-gated for work Mac).
-#         ZELLIJ_SKIP=1 opts out for debugging.
-# Note: checks ZELLIJ_SESSION_NAME (not ZELLIJ) because Zellij leaks ZELLIJ
-#       into the macOS launchd env, which GUI apps like Ghostty inherit.
-if [[ -z "${ZELLIJ_SESSION_NAME:-}" && -z "${ZELLIJ_SKIP:-}" && "${TERM_PROGRAM:-}" == "ghostty" && -o interactive ]]; then
-    if command -v zellij >/dev/null 2>&1; then
-        unset ZELLIJ
-        zellij attach main 2>/dev/null || zellij -n main -s main
+# --- Auto-exec into herdr on interactive Ghostty launch ---
+# Guards: only inside interactive shell, not already inside a herdr pane
+#         (HERDR_PANE_ID is set in shells herdr spawns — prevents nesting),
+#         only in Ghostty, only if herdr installed (capability-gated for work Mac).
+#         HERDR_SKIP=1 opts out for debugging.
+if [[ -z "${HERDR_PANE_ID:-}" && -z "${HERDR_SKIP:-}" && "${TERM_PROGRAM:-}" == "ghostty" && -o interactive ]]; then
+    if command -v herdr >/dev/null 2>&1; then
+        herdr
     fi
 fi
 
@@ -196,3 +194,8 @@ unset __conda_setup
 
 # Added by Antigravity CLI installer
 export PATH="/Users/raviyadav/.local/bin:$PATH"
+
+# Network "profiles": toggle Wi-Fi DNS between Pi-hole (home) and DHCP (roaming)
+alias dns-home='networksetup -setdnsservers Wi-Fi 192.168.178.53 && networksetup -setsearchdomains Wi-Fi rani-team.berlin && echo "DNS -> Pi-hole"'
+alias dns-roam='networksetup -setdnsservers Wi-Fi Empty && networksetup -setsearchdomains Wi-Fi Empty && echo "DNS -> DHCP (auto)"'
+alias dns-status='networksetup -getdnsservers Wi-Fi && scutil --dns | grep "nameserver\[0\]" | head -1'
