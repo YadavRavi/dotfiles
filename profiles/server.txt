@@ -1,0 +1,15 @@
+# Dotfiles profile: server
+# One stow package per line. Blank lines and # comments are ignored.
+# Packages must exist under packages/<name>/.
+#
+# Headless macOS host (e.g. DS9 — the Mac Mini Ollama box), accessed via SSH
+# (and occasionally Remote Desktop). Shell only — no GUI terminals (ghostty/
+# wezterm), no zellij/nvim. The zsh config capability-gates every CLI tool
+# (zoxide/fzf/eza/bat/...), so tools absent on the server degrade gracefully.
+
+# --- Shared core ---
+zsh
+
+# Tools are installed out-of-band (user-level into ~/.local/bin, or MacPorts):
+#   zoxide, fzf   — recommended (cd + history search)
+#   eza, bat      — optional niceties; ls falls back to `ls -G` without eza

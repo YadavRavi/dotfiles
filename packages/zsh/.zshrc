@@ -74,14 +74,23 @@ zstyle ':fzf-tab:complete:__zoxide_zi:*' fzf-preview 'eza -la --icons --git --co
 # Aliases
 alias ff='ls | fzf'
 command -v bat >/dev/null && alias cat='bat'
-alias ls='eza --group-directories-first --icons'
-alias l='eza --git-ignore --group-directories-first --icons'
-alias ll='eza --all --header --long --group-directories-first --icons'
-alias llm='eza --all --header --long --sort=modified --group-directories-first --icons'
-alias la='eza -lbhHigUmuSa'
-alias lx='eza -lbhHigUmuSa@'
-alias lt='eza --tree --group-directories-first --icons'
-alias tree='eza --tree --group-directories-first --icons'
+# eza-based ls family; falls back to plain `ls -G` when eza isn't installed
+# (e.g. a headless server profile) so `ls` never breaks.
+if command -v eza >/dev/null; then
+  alias ls='eza --group-directories-first --icons'
+  alias l='eza --git-ignore --group-directories-first --icons'
+  alias ll='eza --all --header --long --group-directories-first --icons'
+  alias llm='eza --all --header --long --sort=modified --group-directories-first --icons'
+  alias la='eza -lbhHigUmuSa'
+  alias lx='eza -lbhHigUmuSa@'
+  alias lt='eza --tree --group-directories-first --icons'
+  alias tree='eza --tree --group-directories-first --icons'
+else
+  alias ls='ls -G'
+  alias l='ls -G'
+  alias ll='ls -lhG'
+  alias la='ls -lhAG'
+fi
 alias oo='cd ${OSTRICH_VAULT:-$HOME/Documents/ObsidianSyncedVaults/SecondBrain}/'
 alias bup='brew update && brew upgrade && exec zsh'
 function ops() {
@@ -165,3 +174,23 @@ if [[ -z "${ZELLIJ_SESSION_NAME:-}" && -z "${ZELLIJ_SKIP:-}" && "${TERM_PROGRAM:
 fi
 
 # =====================================================================
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/Users/raviyadav/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/Users/raviyadav/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/Users/raviyadav/anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/Users/raviyadav/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+
+
+# Added by Antigravity CLI installer
+export PATH="/Users/raviyadav/.local/bin:$PATH"
