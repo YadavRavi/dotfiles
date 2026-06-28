@@ -34,8 +34,8 @@ zinit light zsh-users/zsh-autosuggestions
 # FZF Tab
 zinit light Aloxaf/fzf-tab
 
-# EZA replacement for ls
-zinit light z-shell/zsh-eza
+# EZA replacement for ls (only when eza is installed — else it errors every startup)
+command -v eza >/dev/null && zinit light z-shell/zsh-eza
 
 # Syntax Highlighting (must be last)
 zinit light zsh-users/zsh-syntax-highlighting
@@ -119,6 +119,10 @@ if command -v yazi >/dev/null; then
     }
 fi
 
+# Local binaries on PATH — must precede the fzf/zoxide init below so user-level
+# installs in ~/.local/bin (e.g. on a server) are found and initialized.
+export PATH="$HOME/.local/bin:$PATH"
+
 # Initialize fzf
 command -v fzf >/dev/null && eval "$(fzf --zsh)"
 
@@ -144,8 +148,6 @@ fi
 # Initialize thefuck
 command -v thefuck >/dev/null && eval "$(thefuck --alias)"
 
-# Local binaries
-export PATH="$HOME/.local/bin:$PATH"
 
 
 # =====================================================================
