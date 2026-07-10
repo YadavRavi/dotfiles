@@ -19,6 +19,7 @@ brew "jj"
 brew "stow"
 brew "neovim"
 brew "zellij"
+brew "herdr"         # default mux (Ghostty auto-exec in .zshrc)
 brew "tmux"          # dormant fallback
 brew "lazygit"
 brew "git-delta"
