@@ -14,7 +14,7 @@ gh
 # --- Work-only ---
 zellij-work
 herdr           # agent-multiplexer eval (brew install herdr); F12 prefix, yneo keys
-                # herdr-personal (workspace bootstrap) is personal-profile only
+herdr-work      # main-layout.sh — 3-workspace bootstrap (LCARS/DPP/AI-Natives; no Counselor/Engineering on work)
 
 # --- Dormant fallbacks (installed but NOT stowed by default) ---
 # tmux is intentionally omitted. To re-activate the dormant fallback:
