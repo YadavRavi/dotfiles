@@ -67,9 +67,9 @@ setopt hist_find_no_dups
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*' menu no
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -la --icons --git --color=always --group-directories-first $realpath 2>/dev/null || ls -la --color $realpath'
-zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'eza -la --icons --git --color=always --group-directories-first $realpath 2>/dev/null || ls -la --color $realpath'
-zstyle ':fzf-tab:complete:__zoxide_zi:*' fzf-preview 'eza -la --icons --git --color=always --group-directories-first $realpath 2>/dev/null || ls -la --color $realpath'
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -la --icons=auto --git --color=always --group-directories-first $realpath 2>/dev/null || ls -la --color $realpath'
+zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'eza -la --icons=auto --git --color=always --group-directories-first $realpath 2>/dev/null || ls -la --color $realpath'
+zstyle ':fzf-tab:complete:__zoxide_zi:*' fzf-preview 'eza -la --icons=auto --git --color=always --group-directories-first $realpath 2>/dev/null || ls -la --color $realpath'
 
 # Aliases
 alias ff='ls | fzf'
@@ -77,14 +77,14 @@ command -v bat >/dev/null && alias cat='bat'
 # eza-based ls family; falls back to plain `ls -G` when eza isn't installed
 # (e.g. a headless server profile) so `ls` never breaks.
 if command -v eza >/dev/null; then
-  alias ls='eza --group-directories-first --icons'
-  alias l='eza --git-ignore --group-directories-first --icons'
-  alias ll='eza --all --header --long --group-directories-first --icons'
-  alias llm='eza --all --header --long --sort=modified --group-directories-first --icons'
+  alias ls='eza --group-directories-first --icons=auto'
+  alias l='eza --git-ignore --group-directories-first --icons=auto'
+  alias ll='eza --all --header --long --group-directories-first --icons=auto'
+  alias llm='eza --all --header --long --sort=modified --group-directories-first --icons=auto'
   alias la='eza -lbhHigUmuSa'
   alias lx='eza -lbhHigUmuSa@'
-  alias lt='eza --tree --group-directories-first --icons'
-  alias tree='eza --tree --group-directories-first --icons'
+  alias lt='eza --tree --group-directories-first --icons=auto'
+  alias tree='eza --tree --group-directories-first --icons=auto'
 else
   alias ls='ls -G'
   alias l='ls -G'
