@@ -10,3 +10,12 @@ opt.shiftwidth = 2
 opt.wrap = false
 opt.swapfile = false
 opt.background = "dark"
+
+-- Quality-of-life (all additive; not set by nvchad.options)
+opt.scrolloff = 8
+opt.confirm = true
+opt.undofile = true
+opt.ignorecase = true
+opt.smartcase = true
+opt.splitright = true
+opt.splitbelow = true
