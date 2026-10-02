@@ -13,6 +13,8 @@ brew "eza"
 brew "fd"
 brew "ripgrep"
 brew "yazi"
+brew "glow"      # yazi: Markdown preview via piper.yazi
+brew "resvg"     # yazi: default SVG previewer
 brew "jq"
 brew "git"
 brew "jj"

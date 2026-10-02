@@ -1,0 +1,28 @@
+# Deltas from Yazi's built-in defaults ONLY.
+# Reference: https://github.com/sxyazi/yazi/blob/main/yazi-config/preset/yazi-default.toml
+#
+# Do not paste the full default file back in. The previous config was a 2024
+# copy of it, and on the 26.x upgrade its stale opener/fetcher/previewer rules
+# (e.g. the removed `mime` fetcher, `name = "*/"` folder rules) shadowed the new
+# defaults. Also no "$schema" key: 26.9.1 rejects it and falls back to presets.
+
+[mgr]
+ratio       = [ 2, 4, 3 ]
+show_hidden = true
+linemode    = "mtime"
+
+# git.yazi: status signs next to files in git/jj repos (setup in init.lua)
+[[plugin.prepend_fetchers]]
+url   = "*"
+run   = "git"
+group = "git"
+
+[[plugin.prepend_fetchers]]
+url   = "*/"
+run   = "git"
+group = "git"
+
+# piper.yazi + glow: rendered Markdown preview (the vault is mostly .md)
+[[plugin.prepend_previewers]]
+url = "*.md"
+run = 'piper -- CLICOLOR_FORCE=1 glow -w=$w -s=$t "$1"'
