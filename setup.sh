@@ -54,6 +54,10 @@ while IFS= read -r line || [[ -n "$line" ]]; do
     if [[ -d "$pkg" ]]; then
         if stow_err=$(stow --restow --dir="$DOTFILES_DIR/packages" --target="$HOME" "$pkg" 2>&1); then
             echo "  [stowed] $pkg"
+            if [[ "$pkg" == "herdr-app" ]]; then
+                rsync -a --delete --exclude gpui-kit.d.ts --exclude jsconfig.json \
+                    "$pkg/.config/herdr-app/mods/lcars/" "$HOME/.config/herdr-app/mods/lcars/"
+            fi
         else
             echo "  [warn] $pkg stow failed:"
             echo "$stow_err" | sed 's/^/    /'

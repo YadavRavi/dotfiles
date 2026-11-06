@@ -1,0 +1,5 @@
+\.DS_Store
+\.git
+# Herdr will not load svg assets through symlinks, not even file-level ones,
+# so mods/ is copied by setup.sh instead of stowed.
+^/\.config/herdr-app/mods
