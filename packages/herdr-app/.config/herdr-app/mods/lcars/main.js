@@ -65,9 +65,21 @@ const row = (id, { label, sub, color, icons = [], action, right }) => h_flex().i
 
 export default class Lcars extends View {
   init(_props, cx) {
-    if (props()?.role !== "side") return;
-    // ponytail: no timers in mods, so `sleep` paces it; two 8 ms CLI calls every 3 s is about 0.5% of a core.
-    cx.spawn(async (cx) => { for (;;) { await this.poll(); cx.notify(); await exec("sleep", ["3"]); } });
+    // Every mod redraw repaints the whole window, so both timers redraw only when something changed.
+    const role = props()?.role;
+    if (role === "side") {
+      cx.timer.every(3000, (cx) => this.refresh(cx));
+      this.refresh(cx);
+    } else if (role === "bottom") {
+      cx.timer.every(60000, (cx) => {
+        const s = stardate();
+        if (s !== this.stardate) { this.stardate = s; cx.notify(); }
+      });
+    }
+  }
+
+  refresh(cx) {
+    cx.spawn(async (cx) => { if (await this.poll()) cx.notify(); });
   }
 
   top() {
@@ -101,8 +113,13 @@ export default class Lcars extends View {
     const list = async (...args) => { const r = await exec("herdr", args).catch(() => null); return r?.code === 0 ? JSON.parse(r.stdout).result : null; };
     this.ws = (await list("workspace", "list"))?.workspaces ?? [];
     this.tui = (await list("agent", "list"))?.agents ?? [];
+    const seen = JSON.stringify([this.ws.map((w) => [w.workspace_id, w.number, w.label, w.agent_status, w.focused]),
+      this.tui.map((a) => [a.pane_id, a.agent, a.agent_status, a.workspace_id, a.focused, a.terminal_title_stripped])]);
+    const changed = seen !== this.seen;
+    this.seen = seen;
     const counts = { agents: this.tui.length, blocked: this.tui.filter((a) => a.agent_status === "blocked").length };
     if (JSON.stringify(counts) !== JSON.stringify(shared("lcars.tui"))) setShared("lcars.tui", counts);
+    return changed;
   }
 
   side() {
@@ -154,7 +171,7 @@ export default class Lcars extends View {
           .when(needs > 0, (el) => el.child(item(`${needs} RED ALERT`, C.red)))
           .child(div().flex_1())
           .child(div().id("palette").flex_none().text_size(14).text_color(C.gold).cursor_pointer().on_click(() => run("app.palette")).child("COMMANDS"))
-          .child(item(`STARDATE ${stardate()}`, C.orange)))
+          .child(item(`STARDATE ${this.stardate ??= stardate()}`, C.orange)))
         .child(bars([[120, C.rose], [40, C.lilac], [null, C.peri], [70, C.peach], [46, C.rose]])));
   }
 
