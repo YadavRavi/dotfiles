@@ -167,7 +167,8 @@ zj() {
 #         (HERDR_PANE_ID is set in shells herdr spawns — prevents nesting),
 #         only in Ghostty, only if herdr installed (capability-gated for work Mac).
 #         HERDR_SKIP=1 opts out for debugging.
-if [[ -z "${HERDR_PANE_ID:-}" && -z "${HERDR_SKIP:-}" && "${TERM_PROGRAM:-}" == "ghostty" && -o interactive ]]; then
+#         Herdr app terminals also report TERM_PROGRAM=ghostty, so exclude them by bundle id.
+if [[ -z "${HERDR_PANE_ID:-}" && -z "${HERDR_SKIP:-}" && "${TERM_PROGRAM:-}" == "ghostty" && "${__CFBundleIdentifier:-}" != "dev.herdr.app" && -o interactive ]]; then
     if command -v herdr >/dev/null 2>&1; then
         herdr
     fi
