@@ -1,0 +1,143 @@
+{
+ "id": "root",
+ "type": "column",
+ "resizable": false,
+ "titlebar": "none",
+ "traffic_lights": [
+  14,
+  12
+ ],
+ "preview": "mods/lcars/preview.svg",
+ "background": "#000000",
+ "theme": "lcars",
+ "ui_font": "Antonio",
+ "terminal_padding": [
+  6,
+  8
+ ],
+ "children": [
+  {
+   "id": "top",
+   "type": "block",
+   "size": {
+    "px": 72
+   },
+   "window_drag": true,
+   "content": {
+    "mod": "lcars",
+    "props": {
+     "role": "top"
+    }
+   }
+  },
+  {
+   "id": "frame",
+   "type": "row",
+   "resizable": false,
+   "children": [
+    {
+     "id": "sidebar",
+     "type": "block",
+     "size": {
+      "px": 260
+     },
+     "content": {
+      "mod": "lcars",
+      "props": {
+       "role": "side"
+      }
+     }
+    },
+    {
+     "id": "work-body",
+     "type": "row",
+     "padding": [
+      6,
+      8
+     ],
+     "gap": 8,
+     "children": [
+      {
+       "id": "main",
+       "type": "block",
+       "content": {
+        "tab": "active",
+        "pane": {
+         "gap": 6,
+         "radius": 0,
+         "background": "background",
+         "lone": true,
+         "border": {
+          "width": 0,
+          "color": "background"
+         },
+         "focus": {
+          "width": 0,
+          "color": "background"
+         },
+         "header": {
+          "content": {
+           "mod": "lcars",
+           "props": {
+            "role": "pane"
+           }
+          },
+          "height": 24,
+          "position": "top",
+          "reveal": "always"
+         }
+        }
+       }
+      },
+      {
+       "id": "panel",
+       "type": "column",
+       "hidden": true,
+       "size": {
+        "px": 368
+       },
+       "min": 280,
+       "max": 900,
+       "children": [
+        {
+         "id": "panel-body",
+         "type": "stack",
+         "active": "files",
+         "children": [
+          {
+           "id": "files",
+           "type": "block",
+           "content": {
+            "mod": "files"
+           }
+          },
+          {
+           "id": "changes",
+           "type": "block",
+           "content": {
+            "mod": "changes"
+           }
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "bottom",
+   "type": "block",
+   "size": {
+    "px": 48
+   },
+   "content": {
+    "mod": "lcars",
+    "props": {
+     "role": "bottom"
+    }
+   }
+  }
+ ]
+}

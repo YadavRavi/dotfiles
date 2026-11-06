@@ -45,6 +45,8 @@ fi
 # --- Stow packages listed in the profile ---
 echo "--- Stowing packages ---"
 cd "$DOTFILES_DIR/packages"
+# Keep these real, or stow folds ~/.config/herdr-app into the repo and the app writes its state there.
+mkdir -p "$HOME/.config/herdr-app/mods" "$HOME/.config/herdr-app/layouts" "$HOME/.config/herdr-app/themes"
 while IFS= read -r line || [[ -n "$line" ]]; do
     pkg="${line%%#*}"                # strip trailing comment
     pkg="${pkg// /}"                 # strip whitespace

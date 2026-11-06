@@ -6,3 +6,7 @@
 
 # Legacy local files (retired in Plan 1)
 local-templates/
+
+# Written by the Herdr app into mods it runs (mods/lcars is a stow symlink into this repo)
+packages/herdr-app/.config/herdr-app/mods/*/gpui-kit.d.ts
+packages/herdr-app/.config/herdr-app/mods/*/jsconfig.json
