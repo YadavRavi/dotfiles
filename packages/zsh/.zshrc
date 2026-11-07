@@ -162,18 +162,6 @@ zj() {
     zellij attach main 2>/dev/null || zellij -n main -s main
 }
 
-# --- Auto-exec into herdr on interactive Ghostty launch ---
-# Guards: only inside interactive shell, not already inside a herdr pane
-#         (HERDR_PANE_ID is set in shells herdr spawns — prevents nesting),
-#         only in Ghostty, only if herdr installed (capability-gated for work Mac).
-#         HERDR_SKIP=1 opts out for debugging.
-#         Herdr app terminals also report TERM_PROGRAM=ghostty, so exclude them by bundle id.
-if [[ -z "${HERDR_PANE_ID:-}" && -z "${HERDR_SKIP:-}" && "${TERM_PROGRAM:-}" == "ghostty" && "${__CFBundleIdentifier:-}" != "dev.herdr.app" && -o interactive ]]; then
-    if command -v herdr >/dev/null 2>&1; then
-        herdr
-    fi
-fi
-
 # =====================================================================
 
 # >>> conda initialize >>>

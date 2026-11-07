@@ -1,10 +1,10 @@
 // LCARS frame for layouts/lcars.json. One mod, four roles (props().role):
-// top (elbow, bars, tabs), side (spaces, TUI workspaces, agents), bottom (elbow, status), pane (pane header).
+// top (elbow, bars, tabs), side (spaces, agents), bottom (elbow, status), pane (pane header).
 // The whole package lives here: layout.json and theme.json are symlinked into layouts/ and themes/.
 // Palette: trekcolors lcars colours. Structure: elbow + bars + panels, as on thelcars.com.
 import { View, div, svg } from "gpui-kit";
 import { h_flex, v_flex } from "gpui-base";
-import { spaces, agents, panes, run, openOverlay, props, layout, shared, setShared, setAgentOrder, updates, home, exec } from "herdr";
+import { spaces, agents, panes, run, openOverlay, props, layout, shared, setAgentOrder, updates, home } from "herdr";
 
 const C = { orange: "#ff9900", tan: "#ffcc99", lilac: "#cc99cc", peri: "#9999cc", blue: "#9999ff", rose: "#cc6666",
   peach: "#ff9966", hop: "#cc6699", gold: "#ffcc66", sky: "#99ccff", red: "#ff3333", black: "#000000" };
@@ -65,21 +65,12 @@ const row = (id, { label, sub, color, icons = [], action, right }) => h_flex().i
 
 export default class Lcars extends View {
   init(_props, cx) {
-    // Every mod redraw repaints the whole window, so both timers redraw only when something changed.
-    const role = props()?.role;
-    if (role === "side") {
-      cx.timer.every(3000, (cx) => this.refresh(cx));
-      this.refresh(cx);
-    } else if (role === "bottom") {
-      cx.timer.every(60000, (cx) => {
-        const s = stardate();
-        if (s !== this.stardate) { this.stardate = s; cx.notify(); }
-      });
-    }
-  }
-
-  refresh(cx) {
-    cx.spawn(async (cx) => { if (await this.poll()) cx.notify(); });
+    // Every mod redraw repaints the whole window, so the clock redraws only when the stardate changes.
+    if (props()?.role !== "bottom") return;
+    cx.timer.every(60000, (cx) => {
+      const s = stardate();
+      if (s !== this.stardate) { this.stardate = s; cx.notify(); }
+    });
   }
 
   top() {
@@ -108,45 +99,22 @@ export default class Lcars extends View {
           .children(enabled.map(panelPill))));
   }
 
-  // The TUI's workspaces and agents, polled from its CLI. Titles stay in memory; only counts are shared.
-  async poll() {
-    const list = async (...args) => { const r = await exec("herdr", args).catch(() => null); return r?.code === 0 ? JSON.parse(r.stdout).result : null; };
-    this.ws = (await list("workspace", "list"))?.workspaces ?? [];
-    this.tui = (await list("agent", "list"))?.agents ?? [];
-    const seen = JSON.stringify([this.ws.map((w) => [w.workspace_id, w.number, w.label, w.agent_status, w.focused]),
-      this.tui.map((a) => [a.pane_id, a.agent, a.agent_status, a.workspace_id, a.focused, a.terminal_title_stripped])]);
-    const changed = seen !== this.seen;
-    this.seen = seen;
-    const counts = { agents: this.tui.length, blocked: this.tui.filter((a) => a.agent_status === "blocked").length };
-    if (JSON.stringify(counts) !== JSON.stringify(shared("lcars.tui"))) setShared("lcars.tui", counts);
-    return changed;
-  }
-
   side() {
-    const list = agents(), ws = this.ws ?? [], tui = this.tui ?? [];
+    const list = agents();
     setAgentOrder(list.map((a) => a.address));
-    const label = (s) => s.replace(/^\d+-/, "");
     const space = (s, i) => row(`sp-${s.id}`, { label: `${String(s.index).padStart(2, "0")} ${spaceName(s)}`,
       color: s.status === "blocked" ? C.red : s.active ? C.orange : CYCLE[i % CYCLE.length],
       icons: s.status ? [icon(stateOf(s.status)[0], s.status === "working")] : [],
       action: () => run("space.select", { id: s.id }),
       right: () => openOverlay({ mod: "menu", kind: "popup", width: 200, height: 260, props: { tab: "space", target: { id: s.id } } }) });
-    const workspace = (w, i) => row(`ws-${w.workspace_id}`, { label: `${String(w.number).padStart(2, "0")} ${up(label(w.label))}`,
-      color: w.agent_status === "blocked" ? C.red : w.focused ? C.orange : CYCLE[i % CYCLE.length],
-      icons: [icon(stateOf(w.agent_status)[0], w.agent_status === "working")],
-      action: () => exec("herdr", ["workspace", "focus", w.workspace_id]) });
-    const crew = (a, status, spin, kind, name, sub, focused, action) => row(`ag-${a}`, { label: name, sub: `${stateOf(status)[1]} · ${up(sub)}`,
-      color: STATUS[status] ?? (focused ? C.tan : C.peri), icons: [icon(CLASS[kind] ?? "padd"), icon(stateOf(status)[0], spin)], action });
-    const named = Object.fromEntries(ws.map((w) => [w.workspace_id, up(label(w.label))]));
+    const crew = (a) => row(`ag-${a.address}`, { label: [...new Set([spaceName({ name: a.space_name }), up(a.tab_name)])].filter(Boolean).join(" "), sub: `${stateOf(a.status)[1]} · ${up(a.title)}`,
+      color: STATUS[a.status] ?? (a.focused ? C.tan : C.peri), icons: [icon(CLASS[a.program?.key] ?? "padd"), icon(stateOf(a.status)[0], a.status === "working")],
+      action: () => run("agent.focus", { terminal: a.address }) });
     return v_flex().size_full().bg(C.black).pt(4).pb(4).gap(4)
       .child(v_flex().id("lcars-side").w_full().min_h(0).flex_shrink(1).gap(4).overflow_y_scroll()
         .child(section("SPACES", spaces().length))
         .children(spaces().map(space))
-        .when(ws.length > 0, (el) => el.child(section("TUI WORKSPACES", ws.length)).children(ws.map(workspace)))
-        .when(list.length + tui.length > 0, (el) => el.child(section("AGENTS", list.length + tui.length))
-          .children(list.map((a) => crew(a.address, a.status, a.status === "working", a.program?.key, `${spaceName({ name: a.space_name })} ${up(a.tab_name)}`, a.title, a.focused, () => run("agent.focus", { terminal: a.address }))))
-          .children(tui.map((a) => crew(a.pane_id, a.agent_status, a.agent_status === "working", a.agent, named[a.workspace_id] ?? "TUI", a.terminal_title_stripped, a.focused,
-            () => exec("herdr", ["agent", "focus", a.pane_id]))))))
+        .when(list.length > 0, (el) => el.child(section("AGENTS", list.length)).children(list.map(crew))))
       .child(div().w_full().flex_1().min_h(10).bg(C.peri))
       .child(block("new-space", "NEW SPACE", C.lilac, () => run("space.new")))
       .child(block("to-main", "STANDARD UI", C.peach, () => run("layout.switch", { name: "main" })))
@@ -155,8 +123,7 @@ export default class Lcars extends View {
 
   bottom() {
     const W = sideWidth(), space = spaces().find((s) => s.active), list = agents();
-    const tui = shared("lcars.tui") ?? { agents: 0, blocked: 0 };
-    const needs = list.filter((a) => a.status === "blocked").length + tui.blocked;
+    const needs = list.filter((a) => a.status === "blocked").length;
     const item = (s, color = C.tan) => div().flex_none().text_size(14).text_color(color).child(s);
     return h_flex().size_full().bg(C.black)
       .child(h_flex().w(W).h_full().flex_none().bg(C.rose).rounded_bl(48).items_end().justify_end().px(8).pb(3)
@@ -167,7 +134,7 @@ export default class Lcars extends View {
         .child(h_flex().flex_1().min_h(0).gap(16).pr(8).items_center()
           .child(item(up(space?.machine ?? "This computer")))
           .when(Boolean(space?.branch), (el) => el.child(item(up(space.branch), C.lilac)))
-          .child(item(`${list.length + tui.agents} AGENTS`, C.peri))
+          .child(item(`${list.length} AGENTS`, C.peri))
           .when(needs > 0, (el) => el.child(item(`${needs} RED ALERT`, C.red)))
           .child(div().flex_1())
           .child(div().id("palette").flex_none().text_size(14).text_color(C.gold).cursor_pointer().on_click(() => run("app.palette")).child("COMMANDS"))
