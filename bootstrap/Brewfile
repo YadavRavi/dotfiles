@@ -1,7 +1,9 @@
-# Brewfile — single file, profile-gated via DOTFILES_PROFILE env var.
+# Brewfile — single file, profile-gated via HOMEBREW_DOTFILES_PROFILE env var.
+# Homebrew strips env vars without the HOMEBREW_ prefix, so a plain DOTFILES_PROFILE arrives as nil.
 # Usage:
-#   DOTFILES_PROFILE=personal brew bundle --file=~/dotfiles/bootstrap/Brewfile
-#   DOTFILES_PROFILE=work     brew bundle --file=~/dotfiles/bootstrap/Brewfile
+#   HOMEBREW_DOTFILES_PROFILE=personal brew bundle --file=~/dotfiles/bootstrap/Brewfile
+#   HOMEBREW_DOTFILES_PROFILE=work     brew bundle --file=~/dotfiles/bootstrap/Brewfile
+profile = ENV["HOMEBREW_DOTFILES_PROFILE"]
 
 # --- Core (all machines) ---
 brew "zsh"
@@ -21,7 +23,7 @@ brew "jj"
 brew "stow"
 brew "neovim"
 brew "zellij"
-brew "herdr"         # default mux (Ghostty auto-exec in .zshrc)
+brew "herdr"         # TUI mux (fallback; the Herdr desktop app is the main driver)
 brew "tmux"          # dormant fallback
 brew "lazygit"
 brew "git-delta"
@@ -29,11 +31,14 @@ brew "git-delta"
 cask "ghostty"
 
 # --- Personal-only ---
-if ENV["DOTFILES_PROFILE"] == "personal"
+if profile == "personal"
   brew "1password-cli"
   cask "1password"
   cask "obsidian"
 end
 
 # --- Work-only ---
-# (currently empty — vault sync handled by iCloud, no work-specific tools needed)
+if profile == "work"
+  # ~/Applications: no admin rights needed, same path as personal (manual install there).
+  cask "herdr-app", args: { appdir: "~/Applications" }
+end
