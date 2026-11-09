@@ -1,0 +1,9 @@
+\.DS_Store
+\.git
+# herdr writes its runtime state here when stow has folded ~/.config/herdr into the repo.
+# Never link it back: live sockets in ~/.config/herdr make stow abort.
+# stow anchors each pattern to the whole basename, hence the leading .*
+.*\.sock
+.*\.log
+session\.json
+session-snapshots
