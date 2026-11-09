@@ -21,4 +21,4 @@ mk() { # $1=space $2=folder $3=station-tab argv (JSON) for NVIM tab
 
 mk LCARS      "$VAULT"                    "$(jq -nc --arg c "$LATEST_LOG" '["sh","-c",$c]')"
 mk DPP        "$VAULT/kb/dpp"             '["nvim"]'
-mk AI-Natives "$HOME/Projects/AI-Natives" '["nvim"]'
+mk AI-Natives "$HOME/Project/ai-native-pdlc" '["nvim"]'  # work laptop: singular ~/Project
