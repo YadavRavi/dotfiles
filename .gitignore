@@ -6,3 +6,8 @@
 
 # Legacy local files (retired in Plan 1)
 local-templates/
+
+# herdr runtime state written into the package when stow folded ~/.config/herdr (seen on the work laptop)
+packages/herdr/.config/herdr/*.log
+packages/herdr/.config/herdr/session.json
+packages/herdr/.config/herdr/session-snapshots/
